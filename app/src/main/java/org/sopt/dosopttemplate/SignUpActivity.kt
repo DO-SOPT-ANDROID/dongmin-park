@@ -1,6 +1,9 @@
 package org.sopt.dosopttemplate
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
@@ -15,6 +18,8 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         signup()
+
+        hideKeyboard()
     }
 
     private fun signup() {
@@ -33,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun isIDCorrect(len: Int) = len in 6..10
     private fun isPWCorrect(len: Int) = len in 8..12
     private fun isMBTICorrect(text: String) = Regex("^[a-zA-Z]{4}\$").matches(text) // 영어 4글자
-    private fun isNotEmptyWithoutSpace(text: String) = text.replace(" ", "").isNotEmpty()
+    private fun isNotEmptyWithoutSpace(text: String) = text.isNotBlank()
 
     private fun signupSuccessed() {
         intent.putExtra("ID", binding.editID.text.toString())
@@ -69,5 +74,17 @@ class SignUpActivity : AppCompatActivity() {
             text,
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    fun hideKeyboard(){
+        binding.root.setOnClickListener {
+            // 키보드 내리기
+            val controller = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            controller.hideSoftInputFromWindow(this.window.decorView.applicationWindowToken, 0)
+
+            // 포커스 없애기
+            val focus = currentFocus
+            focus?.clearFocus()
+        }
     }
 }
