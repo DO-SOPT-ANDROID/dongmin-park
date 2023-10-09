@@ -23,7 +23,7 @@ class SignUpActivity : AppCompatActivity() {
             val isPwCorrect = isPWCorrect(binding.editTextTextPassword.text.length)
             val isNickNameCorrect = isNotEmptyWithoutSpace(binding.editNickname.text.toString())
             val isMBTICorrect = isMBTICorrect(binding.editMBTI.text.toString())
-            val isAboutMeCorrect = isNotEmptyWithoutSpace(binding.editNickname.text.toString())
+            val isAboutMeCorrect = isNotEmptyWithoutSpace(binding.editAboutMe.text.toString())
 
             if (isIdCorrect && isPwCorrect && isNickNameCorrect && isMBTICorrect && isAboutMeCorrect) signupSuccessed()
             else signupFailed(isIdCorrect, isPwCorrect, isNickNameCorrect, isMBTICorrect, isAboutMeCorrect)
