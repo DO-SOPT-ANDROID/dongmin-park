@@ -1,13 +1,8 @@
 package org.sopt.dosopttemplate
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,8 +25,6 @@ class LoginActivity : AppCompatActivity() {
         login()
 
         moveSignUpActivity()
-
-        hideKeyboard()
     }
 
     private fun login() {
@@ -99,17 +92,5 @@ class LoginActivity : AppCompatActivity() {
             text,
             Toast.LENGTH_SHORT
         ).show()
-    }
-
-    fun hideKeyboard(){
-        binding.root.setOnClickListener {
-            // 키보드 내리기
-            val controller = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            controller.hideSoftInputFromWindow(this.window.decorView.applicationWindowToken, 0)
-
-            // 포커스 없애기
-            val focus = currentFocus
-            focus?.clearFocus()
-        }
     }
 }
