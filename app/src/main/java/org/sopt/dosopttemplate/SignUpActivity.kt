@@ -26,7 +26,13 @@ class SignUpActivity : AppCompatActivity() {
             val isAboutMeCorrect = isNotEmptyWithoutSpace(binding.editAboutMe.text.toString())
 
             if (isIdCorrect && isPwCorrect && isNickNameCorrect && isMBTICorrect && isAboutMeCorrect) signupSuccessed()
-            else signupFailed(isIdCorrect, isPwCorrect, isNickNameCorrect, isMBTICorrect, isAboutMeCorrect)
+            else signupFailed(
+                isIdCorrect,
+                isPwCorrect,
+                isNickNameCorrect,
+                isMBTICorrect,
+                isAboutMeCorrect
+            )
         }
     }
 
@@ -53,12 +59,14 @@ class SignUpActivity : AppCompatActivity() {
         isMBTICorrect: Boolean,
         isAboutMeCorrect: Boolean
     ) {
-        val text = if (!isIDCorrect) "ID를 6~10자 사이로 해주세요"
-        else if (!isPWCorrect) "PW를 8~12자 사이로 해주세요"
-        else if (!isNicknameCorrect) "닉네임을 공백 제외 1자 이상 해주세요"
-        else if (!isMBTICorrect) "MBTI를 영문 4개로 설정해주세요"
-        else if (!isAboutMeCorrect) "자기소개를 공백 제외 1자 이상 해주세요"
-        else "ERROR\n다시 시도해주세요"
+        val text = when {
+            !isIDCorrect -> "ID를 6~10자 사이로 해주세요"
+            !isPWCorrect -> "PW를 8~12자 사이로 해주세요"
+            !isNicknameCorrect -> "닉네임을 공백 제외 1자 이상 해주세요"
+            !isMBTICorrect -> "MBTI를 영문 4개로 설정해주세요"
+            !isAboutMeCorrect -> "자기소개를 공백 제외 1자 이상 해주세요"
+            else -> "ERROR\n다시 시도해주세요"
+        }
 
         makeToast(text)
     }
