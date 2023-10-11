@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">DoSoptTemplate</string>
+
+    <!-- activity_login -->
+    <string name="tv_login_title">Welcome to SOPT</string>
+    <string name="tv_login_id_title">ID</string>
+    <string name="etv_login_id">아이디를 입력해주세요</string>
+    <string name="tv_login_pw_title">비밀번호</string>
+    <string name="etv_login_pw">비밀번호를 입력해주세요</string>
+    <string name="btn_login_navi_log_in">로그인 하기</string>
+    <string name="btn_login_navi_sign_up">회원가입하기</string>
+
+    <!-- activity_main -->
+    <string name="tv_main_id_title">ID</string>
+    <string name="tv_main_mbti_title">MBTI</string>
+
+    <!-- activity_main -->
+    <string name="tv_signup_title">SIGN UP</string>
+    <string name="tv_signup_id_title">ID</string>
+    <string name="etv_signup_id">아이디를 입력해주세요</string>
+    <string name="tv_signup_pw_title">비밀번호</string>
+    <string name="etv_signup_pw">비밀번호를 입력해주세요</string>
+    <string name="tv_signup_nickname">닉네임</string>
+    <string name="etv_signup_nickname">닉네임을 입력해주세요</string>
+    <string name="tv_signup_mbti_title">MBTI</string>
+    <string name="etv_signup_mbti">MBTI를 입력해주세요</string>
+    <string name="tv_signup_about_me_title">About Me</string>
+    <string name="etv_signup_about_me">한줄 자기소개를 입력해주세요</string>
+    <string name="btn_signup_navi_login">회원가입 하기</string>
 </resources>
