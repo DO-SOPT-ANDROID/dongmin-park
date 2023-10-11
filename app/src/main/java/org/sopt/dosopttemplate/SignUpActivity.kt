@@ -18,12 +18,12 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signup() {
-        binding.button.setOnClickListener {
-            val isIdCorrect = isIDCorrect(binding.editID.text.length)
-            val isPwCorrect = isPWCorrect(binding.editTextTextPassword.text.length)
-            val isNickNameCorrect = isNotEmptyWithoutSpace(binding.editNickname.text.toString())
-            val isMBTICorrect = isMBTICorrect(binding.editMBTI.text.toString())
-            val isAboutMeCorrect = isNotEmptyWithoutSpace(binding.editAboutMe.text.toString())
+        binding.btnSignupNaviLogin.setOnClickListener {
+            val isIdCorrect = isIDCorrect(binding.etvSignupId.text.length)
+            val isPwCorrect = isPWCorrect(binding.etvSignupPw.text.length)
+            val isNickNameCorrect = isNotEmptyWithoutSpace(binding.etvSignupNickname.text.toString())
+            val isMBTICorrect = isMBTICorrect(binding.etvSignupMbti.text.toString())
+            val isAboutMeCorrect = isNotEmptyWithoutSpace(binding.etvSignupAboutMe.text.toString())
 
             if (isIdCorrect && isPwCorrect && isNickNameCorrect && isMBTICorrect && isAboutMeCorrect) signupSuccessed()
             else signupFailed(
@@ -42,11 +42,11 @@ class SignUpActivity : AppCompatActivity() {
     private fun isNotEmptyWithoutSpace(text: String) = text.replace(" ", "").isNotEmpty()
 
     private fun signupSuccessed() {
-        intent.putExtra("ID", binding.editID.text.toString())
-            .putExtra("PW", binding.editTextTextPassword.text.toString())
-            .putExtra("NICKNAME", binding.editNickname.text.toString())
-            .putExtra("MBTI", binding.editMBTI.text.toString().uppercase())
-            .putExtra("ABOUTME", binding.editAboutMe.text.toString())
+        intent.putExtra("ID", binding.etvSignupId.text.toString())
+            .putExtra("PW", binding.etvSignupPw.text.toString())
+            .putExtra("NICKNAME", binding.etvSignupNickname.text.toString())
+            .putExtra("MBTI", binding.etvSignupMbti.text.toString().uppercase())
+            .putExtra("ABOUTME", binding.etvSignupAboutMe.text.toString())
 
         setResult(RESULT_OK, intent)
         finish()

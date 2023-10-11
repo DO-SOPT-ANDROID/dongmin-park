@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getIntentInfo() {
-        binding.textID.text = intent.getStringExtra("ID")
-        binding.textMBTI.text = intent.getStringExtra("MBTI")
-        binding.Nickname.text = intent.getStringExtra("NICKNAME")
-        binding.textAboutME.text = intent.getStringExtra("ABOUTME")
+        binding.tvMainId.text = intent.getStringExtra("ID")
+        binding.tvMainMbti.text = intent.getStringExtra("MBTI")
+        binding.tvMainNickname.text = intent.getStringExtra("NICKNAME")
+        binding.tvMainAboutMe.text = intent.getStringExtra("ABOUTME")
     }
 }

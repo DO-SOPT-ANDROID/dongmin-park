@@ -28,9 +28,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkLoginAvailable() {
-        binding.button.setOnClickListener {
-            val ID = binding.editID.text.toString()
-            val PW = binding.editTextTextPassword.text.toString()
+        binding.btnLoginNaviLogIn.setOnClickListener {
+            val ID = binding.etvLoginId.text.toString()
+            val PW = binding.etvLoginPw.text.toString()
 
             val isIdCorrect = isIDCorrect(ID)
             val isPwCorrect = isPWCorrect(PW)
@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
     private fun moveSignUpActivity() {
         val intentToSignUpActivity = Intent(this, SignUpActivity::class.java)
 
-        binding.textView6.setOnClickListener {
+        binding.btnLoginNaviSignUp.setOnClickListener {
             resultLauncher.launch(intentToSignUpActivity)
         }
     }
@@ -76,8 +76,8 @@ class LoginActivity : AppCompatActivity() {
                     val MBTI = result.data?.getStringExtra("MBTI") ?: ""
                     val AboutMe = result.data?.getStringExtra("ABOUTME") ?: ""
 
-                    binding.editID.setText(ID)
-                    binding.editTextTextPassword.setText(PW)
+                    binding.etvLoginId.setText(ID)
+                    binding.etvLoginPw.setText(PW)
 
                     intentToMainActivity.putExtra("ID", ID).putExtra("PW", PW)
                         .putExtra("NICKNAME", NICKNAME).putExtra("MBTI", MBTI)
