@@ -22,12 +22,12 @@ class LoginActivity : AppCompatActivity() {
 
         getIntentInfo()
 
-        login()
+        checkLoginAvailable()
 
         moveSignUpActivity()
     }
 
-    private fun login() {
+    private fun checkLoginAvailable() {
         binding.button.setOnClickListener {
             val ID = binding.editID.text.toString()
             val PW = binding.editTextTextPassword.text.toString()
