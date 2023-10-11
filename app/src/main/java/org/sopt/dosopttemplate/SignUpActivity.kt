@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
+import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -38,7 +39,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun isIDCorrect(len: Int) = len in 6..10
     private fun isPWCorrect(len: Int) = len in 8..12
-    private fun isMBTICorrect(text: String) = Regex("^[a-zA-Z]{4}\$").matches(text) // 영어 4글자
+    private fun isMBTICorrect(text: String) = MBTI_REGEX.matcher(text).find()
     private fun isNotEmptyWithoutSpace(text: String) = text.replace(" ", "").isNotEmpty()
 
     private fun signupSuccessed() {
@@ -77,5 +78,10 @@ class SignUpActivity : AppCompatActivity() {
             text,
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    companion object {
+        private const val MBTI_PATTERN = "^[a-zA-Z]{4}\$"
+        val MBTI_REGEX: Pattern = Pattern.compile(MBTI_PATTERN)
     }
 }
