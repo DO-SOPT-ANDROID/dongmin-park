@@ -12,7 +12,7 @@
         android:id="@+id/profileImage"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/profileimage" />
