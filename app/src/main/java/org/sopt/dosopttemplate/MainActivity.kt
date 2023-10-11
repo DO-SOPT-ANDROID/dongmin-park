@@ -1,10 +1,10 @@
 package org.sopt.dosopttemplate
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
-import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
+import androidx.appcompat.app.AppCompatActivity
+import org.sopt.dosopttemplate.Model.User
 import org.sopt.dosopttemplate.databinding.ActivityMainBinding
+import org.sopt.dosopttemplate.util.getParcelable
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,9 +19,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getIntentInfo() {
-        binding.tvMainId.text = intent.getStringExtra("ID")
-        binding.tvMainMbti.text = intent.getStringExtra("MBTI")
-        binding.tvMainNickname.text = intent.getStringExtra("NICKNAME")
-        binding.tvMainAboutMe.text = intent.getStringExtra("ABOUTME")
+        val user: User? = intent.getParcelable("USER", User::class.java)
+
+        with(binding) {
+            tvMainId.text = user?.id
+            tvMainMbti.text = user?.mbti
+            tvMainNickname.text = user?.nickname
+            tvMainAboutMe.text = user?.aboutMe
+        }
     }
 }
