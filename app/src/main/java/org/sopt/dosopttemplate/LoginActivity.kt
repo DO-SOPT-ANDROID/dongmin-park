@@ -3,6 +3,7 @@ package org.sopt.dosopttemplate
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -33,26 +34,30 @@ class LoginActivity : AppCompatActivity() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    user = result.data?.getParcelable("USER", User::class.java)
-                        ?: return@registerForActivityResult
-                    binding.etvLoginId.setText(user?.id)
-                    binding.etvLoginPw.setText(user?.pw)
+                    setIDPW(result)
                 }
             }
     }
 
+    private fun setIDPW(result: ActivityResult) {
+        user = result.data?.getParcelable("USER", User::class.java) ?: return
+
+        binding.etvLoginId.setText(user?.id)
+        binding.etvLoginPw.setText(user?.pw)
+    }
+
     private fun checkLoginAvailable() {
         binding.btnLoginNaviLogIn.setOnClickListener {
-            val ID = binding.etvLoginId.text.toString()
-            val PW = binding.etvLoginPw.text.toString()
-
             if (!::user.isInitialized) {
-                makeToast(this, "회원가입 안됨")
+                makeToast(this, SIGN_UP_ERROR)
                 return@setOnClickListener
             }
 
-            val isIdCorrect = isIDCorrect(ID)
-            val isPwCorrect = isPWCorrect(PW)
+            val id = binding.etvLoginId.text.toString()
+            val pw = binding.etvLoginPw.text.toString()
+
+            val isIdCorrect = isIDCorrect(id)
+            val isPwCorrect = isPWCorrect(pw)
 
             if (isIdCorrect && isPwCorrect) loginSuccessed()
             else loginFailed(isIdCorrect, isPwCorrect)
@@ -63,18 +68,17 @@ class LoginActivity : AppCompatActivity() {
     private fun isPWCorrect(PW: String) = user.pw == PW
 
     private fun loginSuccessed() {
-        // intent flag로 처리해줘야함.
-        // 이 친구는 단방향(intent)를 사용할 때 처리해줘야 함.
-        // ActivityResultLauncher<Intent>는 양방향이기 때문에 안쓰고, 그냥 finish 하면 됨.
         val intentToMainActivity = Intent(this, MainActivity::class.java)
-        makeToast(this, "로그인 성공")
         intentToMainActivity.putExtra("USER", user)
+        intentToMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        makeToast(this, LOGIN_SUCESS)
         startActivity(intentToMainActivity)
+        finish()
     }
 
     private fun loginFailed(isIdCorrect: Boolean, isPwCorrect: Boolean) {
-        val text = if (!isIdCorrect) "ID가 잘못되었습니다"
-        else if (!isPwCorrect) "PW가 잘못되었습니다"
+        val text = if (!isIdCorrect) ID_ERROR
+        else if (!isPwCorrect) PW_ERROR
         else DEFAULT_ERROR
 
         makeToast(this, text)
@@ -95,11 +99,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val ID_ERROR = "ID를 6~10자 사이로 해주세요"
-        private const val PW_ERROR = "PW를 8~12자 사이로 해주세요"
-        private const val NICKNAME_ERROR = "닉네임을 공백 제외 1자 이상 해주세요"
-        private const val MBTI_ERROR = "MBTI를 영문 4개로 설정해주세요"
-        private const val ABOUT_ME_ERROR = "자기소개를 공백 제외 1자 이상 해주세요"
+        private const val LOGIN_SUCESS = "로그인 성공"
+        private const val ID_ERROR = "ID가 잘못되었습니다"
+        private const val PW_ERROR = "PW가 잘못되었습니다"
+        private const val SIGN_UP_ERROR = "회원가입된 정보가 없습니다."
         private const val DEFAULT_ERROR = "ERROR\n다시 시도해주세요"
     }
 }
