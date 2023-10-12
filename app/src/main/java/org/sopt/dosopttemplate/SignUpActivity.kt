@@ -24,11 +24,11 @@ class SignUpActivity : AppCompatActivity() {
         binding.btnSignupNaviLogin.setOnClickListener {
             user = with(binding) {
                 User(
-                    etvSignupId.text.toString(),
-                    etvSignupPw.text.toString(),
-                    etvSignupNickname.text.toString(),
-                    etvSignupMbti.text.toString().uppercase(),
-                    etvSignupAboutMe.text.toString()
+                    id = etvSignupId.text.toString(),
+                    pw = etvSignupPw.text.toString(),
+                    nickname = etvSignupNickname.text.toString(),
+                    mbti = etvSignupMbti.text.toString().uppercase(),
+                    aboutMe = etvSignupAboutMe.text.toString()
                 )
             }
 
@@ -40,10 +40,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun allCorrect(user: User) = isIDCorrect(user.id.length) &&
-                isPWCorrect(user.pw.length) &&
-                isNotEmptyWithoutSpace(user.nickname) &&
-                isMBTICorrect(user.mbti) &&
-                isNotEmptyWithoutSpace(user.aboutMe)
+            isPWCorrect(user.pw.length) &&
+            isNotEmptyWithoutSpace(user.nickname) &&
+            isMBTICorrect(user.mbti) &&
+            isNotEmptyWithoutSpace(user.aboutMe)
 
     private fun isIDCorrect(len: Int) = len in 6..10
     private fun isPWCorrect(len: Int) = len in 8..12
