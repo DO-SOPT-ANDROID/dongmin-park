@@ -1,6 +1,8 @@
 package org.sopt.dosopttemplate
 
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosopttemplate.Model.User
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
@@ -18,6 +20,8 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         signup()
+
+        hideKeyboard()
     }
 
     private fun signup() {
@@ -81,5 +85,18 @@ class SignUpActivity : AppCompatActivity() {
         private const val MBTI_ERROR = "MBTI를 영문 4개로 설정해주세요"
         private const val ABOUT_ME_ERROR = "자기소개를 공백 제외 1자 이상 해주세요"
         private const val DEFAULT_ERROR = "ERROR\n다시 시도해주세요"
+    }
+
+    fun hideKeyboard() {
+        binding.root.setOnClickListener {
+            // 키보드 내리기
+            val controller =
+                this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            controller.hideSoftInputFromWindow(this.window.decorView.applicationWindowToken, 0)
+
+            // 포커스 없애기
+            val focus = currentFocus
+            focus?.clearFocus()
+        }
     }
 }

@@ -1,8 +1,10 @@
 package org.sopt.dosopttemplate
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,6 +30,8 @@ class LoginActivity : AppCompatActivity() {
         checkLoginAvailable()
 
         signUpBtn()
+
+        hideKeyboard()
     }
 
     private fun getIntentInfo() {
@@ -104,5 +108,17 @@ class LoginActivity : AppCompatActivity() {
         private const val PW_ERROR = "PW가 잘못되었습니다"
         private const val SIGN_UP_ERROR = "회원가입된 정보가 없습니다."
         private const val DEFAULT_ERROR = "ERROR\n다시 시도해주세요"
+    }
+
+    fun hideKeyboard(){
+        binding.root.setOnClickListener {
+            // 키보드 내리기
+            val controller = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            controller.hideSoftInputFromWindow(this.window.decorView.applicationWindowToken, 0)
+
+            // 포커스 없애기
+            val focus = currentFocus
+            focus?.clearFocus()
+        }
     }
 }
