@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
     private fun checkLoginAvailable() {
         binding.btnLoginNaviLogIn.setOnClickListener {
             if (!::user.isInitialized) {
-                makeToast(this, SIGN_UP_ERROR)
+                makeToast(this, R.string.LOGIN_SIGN_UP_ERROR.toString())
                 return@setOnClickListener
             }
 
@@ -75,15 +75,15 @@ class LoginActivity : AppCompatActivity() {
         val intentToMainActivity = Intent(this, MainActivity::class.java)
         intentToMainActivity.putExtra("USER", user)
         intentToMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-        makeToast(this, LOGIN_SUCESS)
+        makeToast(this, R.string.LOGIN_SUCCESS.toString())
         startActivity(intentToMainActivity)
         finish()
     }
 
     private fun loginFailed(isIdCorrect: Boolean, isPwCorrect: Boolean) {
-        val text = if (!isIdCorrect) ID_ERROR
-        else if (!isPwCorrect) PW_ERROR
-        else DEFAULT_ERROR
+        val text = if (!isIdCorrect) R.string.ID_ERROR.toString()
+        else if (!isPwCorrect) R.string.PW_ERROR.toString()
+        else R.string.DEFAULT_ERROR.toString()
 
         makeToast(this, text)
     }
@@ -100,14 +100,6 @@ class LoginActivity : AppCompatActivity() {
                 this
             }
         )
-    }
-
-    companion object {
-        private const val LOGIN_SUCESS = "로그인 성공"
-        private const val ID_ERROR = "ID가 잘못되었습니다"
-        private const val PW_ERROR = "PW가 잘못되었습니다"
-        private const val SIGN_UP_ERROR = "회원가입된 정보가 없습니다."
-        private const val DEFAULT_ERROR = "ERROR\n다시 시도해주세요"
     }
 
     fun hideKeyboard(){

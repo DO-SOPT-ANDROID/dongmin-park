@@ -64,12 +64,12 @@ class SignUpActivity : AppCompatActivity() {
         user: User
     ) {
         val text = when {
-            !isIDCorrect(user.id.length) -> ID_ERROR
-            !isPWCorrect(user.pw.length) -> PW_ERROR
-            !isNotEmptyWithoutSpace(user.nickname) -> NICKNAME_ERROR
-            !isMBTICorrect(user.mbti) -> MBTI_ERROR
-            !isNotEmptyWithoutSpace(user.aboutMe) -> ABOUT_ME_ERROR
-            else -> DEFAULT_ERROR
+            !isIDCorrect(user.id.length) -> R.string.ID_ERROR.toString()
+            !isPWCorrect(user.pw.length) -> R.string.PW_ERROR.toString()
+            !isNotEmptyWithoutSpace(user.nickname) -> R.string.NICKNAME_ERROR.toString()
+            !isMBTICorrect(user.mbti) -> R.string.MBTI_ERROR.toString()
+            !isNotEmptyWithoutSpace(user.aboutMe) -> R.string.ABOUT_ME_ERROR.toString()
+            else -> R.string.DEFAULT_ERROR.toString()
         }
 
         makeToast(this, text)
@@ -78,13 +78,6 @@ class SignUpActivity : AppCompatActivity() {
     companion object {
         private const val MBTI_PATTERN = "^[a-zA-Z]{4}\$"
         val MBTI_REGEX: Pattern = Pattern.compile(MBTI_PATTERN)
-
-        private const val ID_ERROR = "ID를 6~10자 사이로 해주세요"
-        private const val PW_ERROR = "PW를 8~12자 사이로 해주세요"
-        private const val NICKNAME_ERROR = "닉네임을 공백 제외 1자 이상 해주세요"
-        private const val MBTI_ERROR = "MBTI를 영문 4개로 설정해주세요"
-        private const val ABOUT_ME_ERROR = "자기소개를 공백 제외 1자 이상 해주세요"
-        private const val DEFAULT_ERROR = "ERROR\n다시 시도해주세요"
     }
 
     fun hideKeyboard() {
