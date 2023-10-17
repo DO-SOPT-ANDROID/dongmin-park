@@ -64,12 +64,12 @@ class SignUpActivity : AppCompatActivity() {
         user: User
     ) {
         val text = when {
-            !isIDCorrect(user.id.length) -> R.string.ID_ERROR.toString()
-            !isPWCorrect(user.pw.length) -> R.string.PW_ERROR.toString()
-            !isNotEmptyWithoutSpace(user.nickname) -> R.string.NICKNAME_ERROR.toString()
-            !isMBTICorrect(user.mbti) -> R.string.MBTI_ERROR.toString()
-            !isNotEmptyWithoutSpace(user.aboutMe) -> R.string.ABOUT_ME_ERROR.toString()
-            else -> R.string.DEFAULT_ERROR.toString()
+            !isIDCorrect(user.id.length) -> getString(R.string.ID_ERROR)
+            !isPWCorrect(user.pw.length) -> getString(R.string.PW_ERROR)
+            !isNotEmptyWithoutSpace(user.nickname) -> getString(R.string.NICKNAME_ERROR)
+            !isMBTICorrect(user.mbti) -> getString(R.string.MBTI_ERROR)
+            !isNotEmptyWithoutSpace(user.aboutMe) -> getString(R.string.ABOUT_ME_ERROR)
+            else -> getString(R.string.DEFAULT_ERROR)
         }
 
         makeToast(this, text)

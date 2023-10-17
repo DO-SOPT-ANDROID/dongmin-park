@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
     private fun checkLoginAvailable() {
         binding.btnLoginNaviLogIn.setOnClickListener {
             if (!::user.isInitialized) {
-                makeToast(this, R.string.LOGIN_SIGN_UP_ERROR.toString())
+                makeToast(this, getString(R.string.LOGIN_SIGN_UP_ERROR))
                 return@setOnClickListener
             }
 
@@ -81,9 +81,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
     private fun loginFailed(isIdCorrect: Boolean, isPwCorrect: Boolean) {
-        val text = if (!isIdCorrect) R.string.ID_ERROR.toString()
-        else if (!isPwCorrect) R.string.PW_ERROR.toString()
-        else R.string.DEFAULT_ERROR.toString()
+        val text = if (!isIdCorrect) getString(R.string.ID_ERROR)
+        else if (!isPwCorrect) getString(R.string.PW_ERROR)
+        else getString(R.string.DEFAULT_ERROR)
 
         makeToast(this, text)
     }
