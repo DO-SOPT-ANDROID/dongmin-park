@@ -71,14 +71,14 @@ class LoginActivity : AppCompatActivity() {
     private fun isIDCorrect(ID: String) = user.id == ID
     private fun isPWCorrect(PW: String) = user.pw == PW
 
-    private fun loginSuccessed() {
-        val intentToMainActivity = Intent(this, MainActivity::class.java)
-        intentToMainActivity.putExtra("USER", user)
-        intentToMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-        makeToast(this, R.string.LOGIN_SUCCESS.toString())
-        startActivity(intentToMainActivity)
-        finish()
-    }
+    private fun loginSuccessed() =
+        Intent(this, MainActivity::class.java).apply {
+            putExtra("USER", user)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            makeToast(this@LoginActivity, R.string.LOGIN_SUCCESS.toString())
+            startActivity(this)
+            finish()
+        }
 
     private fun loginFailed(isIdCorrect: Boolean, isPwCorrect: Boolean) {
         val text = if (!isIdCorrect) R.string.ID_ERROR.toString()
@@ -102,10 +102,11 @@ class LoginActivity : AppCompatActivity() {
         )
     }
 
-    fun hideKeyboard(){
+    fun hideKeyboard() {
         binding.root.setOnClickListener {
             // 키보드 내리기
-            val controller = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val controller =
+                this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             controller.hideSoftInputFromWindow(this.window.decorView.applicationWindowToken, 0)
 
             // 포커스 없애기
