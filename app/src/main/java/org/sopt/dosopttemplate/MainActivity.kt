@@ -7,6 +7,10 @@ import org.sopt.dosopttemplate.databinding.ActivityMainBinding
 import org.sopt.dosopttemplate.util.getParcelable
 
 class MainActivity : AppCompatActivity() {
+
+
+
+    /*
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,4 +32,6 @@ class MainActivity : AppCompatActivity() {
             tvMainAboutMe.text = user?.aboutMe
         }
     }
+
+     */
 }
