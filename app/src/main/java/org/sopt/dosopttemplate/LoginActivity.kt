@@ -1,28 +1,23 @@
 package org.sopt.dosopttemplate
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosopttemplate.Model.User
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
+class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.inflate(it) }) {
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         getIntentInfo()
@@ -30,8 +25,6 @@ class LoginActivity : AppCompatActivity() {
         checkLoginAvailable()
 
         signUpBtn()
-
-        hideKeyboard()
     }
 
     private fun getIntentInfo() {
@@ -75,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
         Intent(this, MainActivity::class.java).apply {
             putExtra("USER", user)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            makeToast(this@LoginActivity, R.string.LOGIN_SUCCESS.toString())
+            makeToast(this@LoginActivity, getString(R.string.LOGIN_SUCCESS))
             startActivity(this)
             finish()
         }
@@ -100,18 +93,5 @@ class LoginActivity : AppCompatActivity() {
                 this
             }
         )
-    }
-
-    fun hideKeyboard() {
-        binding.root.setOnClickListener {
-            // 키보드 내리기
-            val controller =
-                this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            controller.hideSoftInputFromWindow(this.window.decorView.applicationWindowToken, 0)
-
-            // 포커스 없애기
-            val focus = currentFocus
-            focus?.clearFocus()
-        }
     }
 }
