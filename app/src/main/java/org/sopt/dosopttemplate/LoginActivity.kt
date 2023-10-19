@@ -64,13 +64,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
     private fun isIDCorrect(ID: String) = user.id == ID
     private fun isPWCorrect(PW: String) = user.pw == PW
 
-    private fun loginSuccessed() =
+    private fun loginSuccessed(){
+        makeToast(this, getString(R.string.LOGIN_SUCCESS))
+        moveMainActivity()
+        finish()
+    }
+
+    private fun moveMainActivity() =
         Intent(this, MainActivity::class.java).apply {
             putExtra("USER", user)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            makeToast(this@LoginActivity, getString(R.string.LOGIN_SUCCESS))
             startActivity(this)
-            finish()
         }
 
     private fun loginFailed(isIdCorrect: Boolean, isPwCorrect: Boolean) {
