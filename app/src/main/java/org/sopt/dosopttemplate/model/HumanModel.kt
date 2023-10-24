@@ -15,5 +15,6 @@ sealed class HumanModel {
         val profileImage: Int,
         val name: String,
         val aboutMe: String,
+        val useMelon: Boolean
     ) : HumanModel()
 }

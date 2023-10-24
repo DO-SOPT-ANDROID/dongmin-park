@@ -15,46 +15,54 @@ class HomeViewModel : ViewModel() {
             profileImage = R.drawable.iv_profile,
             name = "전성기 시절 파트장",
             aboutMe = "꼼짝마 손들어",
+            useMelon = true
         ),
         HumanModel.FriendModel(
             profileImage = R.drawable.iv_profile,
             name = "손흥민",
             aboutMe = "나보다 잘생긴 사람 있으면 나와",
+            useMelon = true
         ),
         HumanModel.FriendModel(
             profileImage = R.drawable.iv_profile,
             name = "파트장",
             aboutMe = "표정 풀자",
+            useMelon = false
         ),
         HumanModel.FriendModel(
             profileImage = R.drawable.iv_profile,
             name = "전성기 시절 파트장",
             aboutMe = "꼼짝마 손들어",
+            useMelon = true
         ),
         HumanModel.FriendModel(
             profileImage = R.drawable.iv_profile,
             name = "손흥민",
             aboutMe = "나보다 잘생긴 사람 있으면 나와",
+            useMelon = false
         ),
         HumanModel.FriendModel(
             profileImage = R.drawable.iv_profile,
             name = "파트장",
             aboutMe = "표정 풀자",
-        ),
-        HumanModel.FriendModel(
+            useMelon = true
+        ),HumanModel.FriendModel(
             profileImage = R.drawable.iv_profile,
             name = "전성기 시절 파트장",
             aboutMe = "꼼짝마 손들어",
+            useMelon = false
         ),
         HumanModel.FriendModel(
             profileImage = R.drawable.iv_profile,
             name = "손흥민",
             aboutMe = "나보다 잘생긴 사람 있으면 나와",
+            useMelon = false
         ),
         HumanModel.FriendModel(
             profileImage = R.drawable.iv_profile,
             name = "파트장",
             aboutMe = "표정 풀자",
+            useMelon = false
         ),
     )
 }
