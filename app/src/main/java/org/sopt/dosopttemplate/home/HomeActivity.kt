@@ -1,9 +1,11 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import org.sopt.dosopttemplate.DoAndroidFragment
+import org.sopt.dosopttemplate.MyPageFragment
+import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -31,17 +33,17 @@ class HomeActivity : AppCompatActivity() {
     private fun clickBottomNavigation() {
         binding.bnvHome.setOnItemSelectedListener{
             when (it.itemId) {
-                R.id.menu_home-> {
+                R.id.menu_home -> {
                     replaceFragment(HomeFragment())
                     true
                 }
 
-                R.id.menu_do_android-> {
+                R.id.menu_do_android -> {
                     replaceFragment(DoAndroidFragment())
                     true
                 }
 
-                R.id.menu_mypage-> {
+                R.id.menu_mypage -> {
                     replaceFragment(MyPageFragment())
                     true
                 }
