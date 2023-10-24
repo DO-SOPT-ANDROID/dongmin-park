@@ -12,8 +12,7 @@ import org.sopt.dosopttemplate.databinding.ItemMyBinding
 class FriendAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
 
-    // 임시의 빈 리스트
-    private lateinit var friendList: MutableList<HumanModel>
+    private lateinit var humanList: MutableList<HumanModel>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         when (viewType) {
@@ -30,7 +29,7 @@ class FriendAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
         }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = friendList[position]
+        val item = humanList[position]
 
         when (holder) {
             is FriendViewHolder -> holder.onBind(item as HumanModel.FriendModel)
@@ -38,19 +37,22 @@ class FriendAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
         }
     }
 
-    override fun getItemCount() = friendList.size
+    override fun getItemCount() = humanList.size
 
-    override fun getItemViewType(position: Int) = when (friendList[position]) {
-        is HumanModel.MyModel -> R.layout.item_my
-        is HumanModel.FriendModel -> R.layout.item_friend
-    }
-
-    fun setFriendList(list: MutableList<HumanModel>) {
-        if (!::friendList.isInitialized) {
-            friendList = mutableListOf()
+    override fun getItemViewType(position: Int) =
+        when (humanList[position]) {
+            is HumanModel.MyModel -> R.layout.item_my
+            is HumanModel.FriendModel -> R.layout.item_friend
         }
-        friendList.clear()
-        friendList = list
+
+    fun setHumanList(list: MutableList<HumanModel>) {
+        if (!::humanList.isInitialized) {
+            humanList = mutableListOf()
+        }
+
+        humanList.clear()
+        humanList = list
+
         notifyDataSetChanged()
     }
 }

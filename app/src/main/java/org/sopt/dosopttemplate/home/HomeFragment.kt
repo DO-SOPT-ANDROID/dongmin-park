@@ -25,11 +25,15 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
+
         val friendAdapter = FriendAdapter(requireContext())
         binding.rvFriends.adapter = friendAdapter
-        friendAdapter.setFriendList(viewModel.mockFriendList)
+        friendAdapter.setHumanList(viewModel.mockFriendList)
     }
 
     override fun onDestroyView() {

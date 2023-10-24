@@ -67,11 +67,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
 
     private fun loginSuccessed() {
         makeToast(this, getString(R.string.LOGIN_SUCCESS))
-        moveMainActivity()
+        moveHomeActivity()
         finish()
     }
 
-    private fun moveMainActivity() =
+    private fun moveHomeActivity() =
         Intent(this, HomeActivity::class.java).apply {
             putExtra("USER", user)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -86,17 +86,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
         makeToast(this, text)
     }
 
-    private fun signUpBtn() {
+    private fun signUpBtn() =
         binding.btnLoginNaviSignUp.setOnClickListener {
             moveSignUpActivity()
         }
-    }
 
-    private fun moveSignUpActivity() {
+    private fun moveSignUpActivity() =
         resultLauncher.launch(
             Intent(this, SignUpActivity::class.java).apply {
                 this
             }
         )
-    }
 }

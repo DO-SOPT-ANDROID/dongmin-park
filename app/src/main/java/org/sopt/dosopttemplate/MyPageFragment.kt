@@ -34,14 +34,14 @@ class MyPageFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setUserInfo() {
+    private fun setUserInfo() =
         with(binding) {
-            tvMainId.text = arguments?.getString(ARGS_ID)//user?.id
+            tvMainId.text = arguments?.getString(ARGS_ID)
             tvMainMbti.text = arguments?.getString(ARGS_MBTI)
             tvMainNickname.text = arguments?.getString(ARGS_NICKNAME)
             tvMainAboutMe.text = arguments?.getString(ARGS_ABOUTME)
         }
-    }
+
 
     companion object {
         private const val ARGS_ID = "ID"

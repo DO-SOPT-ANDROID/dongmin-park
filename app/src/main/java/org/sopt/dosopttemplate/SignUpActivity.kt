@@ -17,7 +17,7 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>({ ActivitySignupBindi
         signup()
     }
 
-    private fun signup() {
+    private fun signup() =
         binding.btnSignupNaviLogin.setOnClickListener {
             user = with(binding) {
                 User(
@@ -34,7 +34,7 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>({ ActivitySignupBindi
             else
                 signupFailed(user)
         }
-    }
+
 
     private fun allCorrect(user: User) = isIDCorrect(user.id.length) &&
             isPWCorrect(user.pw.length) &&

@@ -23,9 +23,7 @@ class DoAndroidFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // 대부분의 로직은 여기에 구현합니다.
-        // 원두를 갈고~
-        // 커피를 내리고~
+        // 해당 프라그먼트에서 실행하고자 하는 대부분의 내용이 담겨용
     }
 
     override fun onDestroyView() {
