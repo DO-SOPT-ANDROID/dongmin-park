@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
     // 바텀 네비게이션을 클릭 했을 때? -> 사용자가 누른 아이템(메뉴의 아이템)에 따라 when문을 통해 해당하는 Fragment를 담아서 함수를 실행합니다.
     // true와 false는 리스너에게 Fragment 교체 작업을 정상적으로 처리했다는 것을 알려주기 위해서 작성합니다.
     private fun clickBottomNavigation() {
-        binding.bnvHome.setOnItemSelectedListener{
+        binding.bnvHome.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {
                     replaceFragment(HomeFragment())
@@ -73,6 +73,8 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getUserInfo() {
-        userInfo = intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException("뭐에요. 내 user 정보 돌려줘요")
+        userInfo = intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException(
+            "뭐에요. 내 user 정보 돌려줘요"
+        )
     }
 }
