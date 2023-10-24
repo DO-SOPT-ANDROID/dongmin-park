@@ -1,7 +1,7 @@
 package org.sopt.dosopttemplate.home
 
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.Model.HumanModel
+import org.sopt.dosopttemplate.model.HumanModel
 import org.sopt.dosopttemplate.R
 
 class HomeViewModel : ViewModel() {

@@ -1,7 +1,7 @@
 package org.sopt.dosopttemplate
 
 import android.os.Bundle
-import org.sopt.dosopttemplate.Model.User
+import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.base.BaseActivity
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.utilprivate.makeToast

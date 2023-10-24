@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.sopt.dosopttemplate.DoAndroidFragment
-import org.sopt.dosopttemplate.Model.User
+import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.MyPageFragment
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding

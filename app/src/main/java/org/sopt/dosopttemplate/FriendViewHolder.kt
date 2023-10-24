@@ -1,7 +1,7 @@
 package org.sopt.dosopttemplate
 
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.dosopttemplate.Model.HumanModel
+import org.sopt.dosopttemplate.model.HumanModel
 import org.sopt.dosopttemplate.databinding.ItemFriendBinding
 
 class FriendViewHolder(private val binding: ItemFriendBinding) :
