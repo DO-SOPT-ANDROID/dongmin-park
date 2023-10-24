@@ -4,12 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.sopt.dosopttemplate.DoAndroidFragment
+import org.sopt.dosopttemplate.Model.User
 import org.sopt.dosopttemplate.MyPageFragment
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
+import org.sopt.dosopttemplate.util.getParcelable
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var userInfo: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         clickBottomNavigation()
+        getUserInfo()
     }
 
     // 바텀 네비게이션을 클릭 했을 때? -> 사용자가 누른 아이템(메뉴의 아이템)에 따라 when문을 통해 해당하는 Fragment를 담아서 함수를 실행합니다.
@@ -44,7 +48,14 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 R.id.menu_mypage -> {
-                    replaceFragment(MyPageFragment())
+                    replaceFragment(
+                        MyPageFragment.newInstance(
+                            id = userInfo.id,
+                            aboutMe = userInfo.aboutMe,
+                            nickname = userInfo.nickname,
+                            mbti = userInfo.mbti
+                        )
+                    )
                     true
                 }
 
@@ -59,5 +70,9 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcv_home, fragment)
             .commit()
+    }
+
+    private fun getUserInfo() {
+        userInfo = intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException("뭐에요. 내 user 정보 돌려줘요")
     }
 }
