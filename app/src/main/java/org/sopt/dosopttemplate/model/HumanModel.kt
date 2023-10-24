@@ -25,5 +25,4 @@ sealed class HumanModel {
         val aboutMe: String,
         val useMelon: Boolean
     ) : HumanModel()
-
 }

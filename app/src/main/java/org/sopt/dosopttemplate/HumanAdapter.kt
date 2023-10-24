@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import org.sopt.dosopttemplate.databinding.ItemBirthdayFriendBinding
-import org.sopt.dosopttemplate.model.HumanModel
 import org.sopt.dosopttemplate.databinding.ItemFriendBinding
 import org.sopt.dosopttemplate.databinding.ItemMyBinding
+import org.sopt.dosopttemplate.model.HumanModel
 
 class HumanAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
