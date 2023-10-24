@@ -17,4 +17,13 @@ sealed class HumanModel {
         val aboutMe: String,
         val useMelon: Boolean
     ) : HumanModel()
+
+    data class FriendBirthdayModel(
+        @DrawableRes
+        val profileImage: Int,
+        val name: String,
+        val aboutMe: String,
+        val useMelon: Boolean
+    ) : HumanModel()
+
 }

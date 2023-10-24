@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/iv_profile"
-        android:layout_width="80dp"
+        android:layout_width="50dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/iv_profile"
@@ -26,14 +26,32 @@
         app:layout_constraintStart_toEndOf="@id/iv_profile"
         app:layout_constraintTop_toTopOf="@id/iv_profile" />
 
+    <ImageView
+        android:id="@+id/iv_item_friend_birthday"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        app:srcCompat="@android:drawable/star_on" />
+
     <TextView
         android:id="@+id/tv_self_decription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:maxLines="1"
         android:text="나는 동민쓰, 24살인뎀"
-        app:layout_constraintStart_toStartOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <ImageView
+        android:id="@+id/iv_item_friend_use_melon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_profile"
+        app:srcCompat="@android:drawable/ic_media_play" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
