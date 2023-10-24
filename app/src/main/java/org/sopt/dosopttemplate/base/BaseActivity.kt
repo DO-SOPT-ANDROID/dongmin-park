@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.base
 
 import android.app.Activity
 import android.os.Bundle

@@ -5,33 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
+import org.sopt.dosopttemplate.base.BaseFragment
 import org.sopt.dosopttemplate.databinding.FragmentMyPageBinding
 
-class MyPageFragment : Fragment() {
-    private var _binding: FragmentMyPageBinding? = null
-
-    private val binding: FragmentMyPageBinding
-        get() = requireNotNull(_binding) { "FragmentMyPage 바인딩 객체가 생성되지 않았습니다" }
-
-    override fun onCreateView(
+class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
+    override fun getFragmentBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMyPageBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        container: ViewGroup?
+    ): FragmentMyPageBinding =FragmentMyPageBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setUserInfo()
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 
     private fun setUserInfo() =
