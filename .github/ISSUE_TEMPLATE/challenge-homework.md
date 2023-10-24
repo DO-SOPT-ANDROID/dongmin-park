@@ -2,7 +2,7 @@
 name: challenge homework
 about: "\b도전 과제 구현 템플릿"
 title: ''
-labels: ''
+labels: Challenge
 assignees: ''
 
 ---

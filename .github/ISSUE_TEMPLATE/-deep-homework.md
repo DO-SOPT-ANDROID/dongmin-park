@@ -2,7 +2,7 @@
 name: "\bdeep homework"
 about: 심화 과제 구현 템플릿
 title: ''
-labels: ''
+labels: Deep
 assignees: ''
 
 ---
