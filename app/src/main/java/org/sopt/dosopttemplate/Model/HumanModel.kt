@@ -2,7 +2,7 @@ package org.sopt.dosopttemplate.Model
 
 import androidx.annotation.DrawableRes
 
-sealed class HumanModel{
+sealed class HumanModel {
     data class MyModel(
         @DrawableRes
         val profileImage: Int,

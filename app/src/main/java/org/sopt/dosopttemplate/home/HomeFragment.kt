@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import org.sopt.dosopttemplate.FriendAdapter
-import org.sopt.dosopttemplate.Model.Friend
-import org.sopt.dosopttemplate.Model.HumanModel
-import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

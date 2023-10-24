@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import org.sopt.dosopttemplate.Model.Friend
 import org.sopt.dosopttemplate.Model.HumanModel
 import org.sopt.dosopttemplate.databinding.ItemFriendBinding
 import org.sopt.dosopttemplate.databinding.ItemMyBinding
-import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class FriendAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
@@ -18,27 +16,18 @@ class FriendAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     private lateinit var friendList: MutableList<HumanModel>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        when(viewType){
+        when (viewType) {
             R.layout.item_my -> {
                 val binding = ItemMyBinding.inflate(inflater, parent, false)
-               MyViewHolder(binding)
+                MyViewHolder(binding)
             }
+
             else -> {
                 val binding = ItemFriendBinding.inflate(inflater, parent, false)
                 FriendViewHolder(binding)
             }
 
         }
-
-//    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        val item = friendList[position]
-//
-//        when (holder) {
-//            is FriendViewHolder -> holder.onBind(item as HumanModel.FriendModel)
-//            is MyViewHolder -> holder.onBind(item as HumanModel.MyModel)
-//        }
-//    }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = friendList[position]

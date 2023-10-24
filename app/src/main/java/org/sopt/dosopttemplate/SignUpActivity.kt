@@ -6,7 +6,7 @@ import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.utilprivate.makeToast
 import java.util.regex.Pattern
 
-class SignUpActivity : BaseActivity<ActivitySignupBinding>({ActivitySignupBinding.inflate(it)}) {
+class SignUpActivity : BaseActivity<ActivitySignupBinding>({ ActivitySignupBinding.inflate(it) }) {
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {

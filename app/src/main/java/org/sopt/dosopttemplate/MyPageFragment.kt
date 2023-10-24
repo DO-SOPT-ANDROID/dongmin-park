@@ -1,13 +1,11 @@
 package org.sopt.dosopttemplate
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import org.sopt.dosopttemplate.Model.User
 import org.sopt.dosopttemplate.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
@@ -36,7 +34,7 @@ class MyPageFragment : Fragment() {
         _binding = null
     }
 
-    private fun setUserInfo(){
+    private fun setUserInfo() {
         with(binding) {
             tvMainId.text = arguments?.getString(ARGS_ID)//user?.id
             tvMainMbti.text = arguments?.getString(ARGS_MBTI)

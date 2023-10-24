@@ -1,7 +1,6 @@
 package org.sopt.dosopttemplate.home
 
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.Model.Friend
 import org.sopt.dosopttemplate.Model.HumanModel
 import org.sopt.dosopttemplate.R
 

@@ -65,7 +65,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
     private fun isIDCorrect(ID: String) = user.id == ID
     private fun isPWCorrect(PW: String) = user.pw == PW
 
-    private fun loginSuccessed(){
+    private fun loginSuccessed() {
         makeToast(this, getString(R.string.LOGIN_SUCCESS))
         moveMainActivity()
         finish()
