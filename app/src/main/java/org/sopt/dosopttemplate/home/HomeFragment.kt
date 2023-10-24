@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import org.sopt.dosopttemplate.FriendAdapter
+import org.sopt.dosopttemplate.HumanAdapter
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        val friendAdapter = FriendAdapter(requireContext())
+        val friendAdapter = HumanAdapter(requireContext())
         binding.rvFriends.adapter = friendAdapter
         friendAdapter.setHumanList(viewModel.mockFriendList)
     }

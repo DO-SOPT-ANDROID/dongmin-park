@@ -9,7 +9,7 @@ import org.sopt.dosopttemplate.Model.HumanModel
 import org.sopt.dosopttemplate.databinding.ItemFriendBinding
 import org.sopt.dosopttemplate.databinding.ItemMyBinding
 
-class FriendAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class HumanAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
 
     private lateinit var humanList: MutableList<HumanModel>
