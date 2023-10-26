@@ -1,14 +1,17 @@
 package org.sopt.dosopttemplate.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.sopt.dosopttemplate.DoAndroidFragment
+import org.sopt.dosopttemplate.LoginActivity
 import org.sopt.dosopttemplate.MyPageFragment
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
 import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.util.getParcelable
+import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -21,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
 
         connectFragemnt()
         clickBottomNavigation()
-        getUserInfo()
+        setUser()
     }
 
     private fun connectFragemnt() {
@@ -71,9 +74,32 @@ class HomeActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun getUserInfo() {
-        userInfo = intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException(
-            "뭐에요. 내 user 정보 돌려줘요"
-        )
+    private fun setUser() {
+        lateinit var text: String
+
+        try {
+            getUserInfo()
+
+            text = getString(R.string.LOGIN_SUCCESS)
+        } catch (e: IllegalArgumentException) {
+            moveLoginActivity()
+
+            text = e.message!!
+        } finally {
+            makeToast(this, text)
+        }
     }
+
+    private fun getUserInfo(){
+        userInfo =
+            intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException(
+                "뭐에요. 내 user 정보 돌려줘요"
+            )
+    }
+
+    private fun moveLoginActivity() =
+        Intent(this, LoginActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(this)
+        }
 }

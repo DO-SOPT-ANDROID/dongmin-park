@@ -67,7 +67,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
     private fun isPWCorrect(PW: String) = user.pw == PW
 
     private fun loginSuccessed() {
-        makeToast(this, getString(R.string.LOGIN_SUCCESS))
         moveHomeActivity()
         finish()
     }
