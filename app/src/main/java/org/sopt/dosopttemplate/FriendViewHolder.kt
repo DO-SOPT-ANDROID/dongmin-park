@@ -1,6 +1,5 @@
 package org.sopt.dosopttemplate
 
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.dosopttemplate.databinding.ItemFriendBinding
@@ -9,11 +8,12 @@ import org.sopt.dosopttemplate.model.HumanModel
 class FriendViewHolder(private val binding: ItemFriendBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun onBind(friendData: HumanModel.FriendModel) {
-        binding.ivProfile.setImageResource(friendData.profileImage)
-        binding.tvName.text = friendData.name
-        binding.tvSelfDecription.text = friendData.aboutMe
-        if (friendData.useMelon)
-            binding.ivItemFriendUseMelon.isVisible = true
-    }
+    fun onBind(friendData: HumanModel.FriendModel) =
+        with(binding) {
+            ivProfile.setImageResource(friendData.profileImage)
+            tvName.text = friendData.name
+            tvSelfDecription.text = friendData.aboutMe
+            if (friendData.useMelon)
+                ivItemFriendUseMelon.isVisible = true
+        }
 }
