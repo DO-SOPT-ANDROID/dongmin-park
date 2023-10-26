@@ -1,6 +1,7 @@
 package org.sopt.dosopttemplate
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.dosopttemplate.databinding.ItemFriendBinding
 import org.sopt.dosopttemplate.model.HumanModel
@@ -13,6 +14,6 @@ class FriendViewHolder(private val binding: ItemFriendBinding) :
         binding.tvName.text = friendData.name
         binding.tvSelfDecription.text = friendData.aboutMe
         if (friendData.useMelon)
-            binding.ivItemFriendUseMelon.visibility = View.VISIBLE
+            binding.ivItemFriendUseMelon.isVisible = true
     }
 }
