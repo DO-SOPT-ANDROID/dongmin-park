@@ -25,6 +25,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         val humanAdapter = HumanAdapter(requireContext())
         binding.rvHumans.adapter = humanAdapter
-        humanAdapter.setHumanList(viewModel.mockFriendList)
+        humanAdapter.addHumanList(viewModel.mockFriendList)
     }
 }

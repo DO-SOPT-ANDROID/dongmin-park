@@ -13,7 +13,7 @@ import org.sopt.dosopttemplate.model.HumanModel
 class HumanAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
 
-    private lateinit var humanList: MutableList<HumanModel>
+    private val humanList: MutableList<HumanModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         when (viewType) {
@@ -53,13 +53,9 @@ class HumanAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
             is HumanModel.FriendBirthdayModel -> R.layout.item_birthday_friend
         }
 
-    fun setHumanList(list: MutableList<HumanModel>) {
-        if (!::humanList.isInitialized) {
-            humanList = mutableListOf()
-        }
-
+    fun addHumanList(list: MutableList<HumanModel>) {
         humanList.clear()
-        humanList = list
+        humanList.addAll(list)
 
         notifyDataSetChanged()
     }
