@@ -19,6 +19,12 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        connectFragemnt()
+        clickBottomNavigation()
+        getUserInfo()
+    }
+
+    private fun connectFragemnt() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_home)
         if (currentFragment == null) {
             binding.bnvHome.selectedItemId = R.id.menu_home
@@ -27,9 +33,6 @@ class HomeActivity : AppCompatActivity() {
                 .add(R.id.fcv_home, HomeFragment())
                 .commit()
         }
-
-        clickBottomNavigation()
-        getUserInfo()
     }
 
     private fun clickBottomNavigation() {
