@@ -68,11 +68,11 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcv_home, fragment)
             .commit()
-    }
+
 
     private fun setUser() {
         lateinit var text: String
@@ -90,7 +90,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserInfo(){
+    private fun getUserInfo() {
         userInfo =
             intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException(
                 "뭐에요. 내 user 정보 돌려줘요"
