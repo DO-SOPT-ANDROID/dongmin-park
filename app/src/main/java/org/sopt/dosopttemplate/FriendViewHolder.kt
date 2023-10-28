@@ -13,7 +13,6 @@ class FriendViewHolder(private val binding: ItemFriendBinding) :
             ivProfile.setImageResource(friendData.profileImage)
             tvName.text = friendData.name
             tvSelfDecription.text = friendData.aboutMe
-            if (friendData.useMelon)
-                ivItemFriendUseMelon.isVisible = true
+            ivItemFriendUseMelon.isVisible = friendData.useMelon
         }
 }
