@@ -84,7 +84,7 @@ class HomeActivity : AppCompatActivity() {
         } catch (e: IllegalArgumentException) {
             moveLoginActivity()
 
-            text = e.message!!
+            text = e.message.toString()
         } finally {
             makeToast(this, text)
         }
