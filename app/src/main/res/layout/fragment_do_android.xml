@@ -6,8 +6,8 @@
 
     <TextView
         android:id="@+id/tv_fragment_hoem_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="DO ANDROID"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
