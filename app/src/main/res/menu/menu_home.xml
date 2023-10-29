@@ -5,18 +5,18 @@
     <item
         android:id="@+id/menu_do_android"
         android:icon="@drawable/ic_do_android_white_24"
-        android:title="DO ANDROID" />
+        android:title="@string/DO_SOPT" />
 
     <!-- Home -->
     <item
         android:id="@+id/menu_home"
         android:icon="@drawable/ic_home_white_24"
-        android:title="홈" />
+        android:title="@string/HOME" />
 
     <!-- MyPage -->
     <item
         android:id="@+id/menu_mypage"
         android:icon="@drawable/ic_person_white_24"
-        android:title="마이페이지" />
+        android:title="@string/MY_PAGE" />
 
 </menu>

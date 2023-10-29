@@ -8,7 +8,7 @@
         android:id="@+id/tv_fragment_hoem_title"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="DO ANDROID"
+        android:text="@string/DO_SOPT"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
