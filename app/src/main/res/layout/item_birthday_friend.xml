@@ -7,28 +7,28 @@
     android:layout_margin="20dp">
 
     <ImageView
-        android:id="@+id/iv_profile"
+        android:id="@+id/iv_birthday_friend_item_profile"
         android:layout_width="50dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        tools:src="@drawable/iv_profile"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/iv_profile" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        tools:text="user_name"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/iv_profile"
-        app:layout_constraintTop_toTopOf="@id/iv_profile" />
+        app:layout_constraintStart_toEndOf="@id/iv_birthday_friend_item_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_birthday_friend_item_profile"
+        tools:text="user_name" />
 
     <ImageView
-        android:id="@+id/iv_item_friend_birthday"
+        android:id="@+id/iv_birthday_friend_item_is_birthday"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginStart="4dp"
@@ -38,21 +38,21 @@
         app:srcCompat="@android:drawable/star_on" />
 
     <TextView
-        android:id="@+id/tv_self_decription"
+        android:id="@+id/tv_birthday_friend_item_self_decription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        tools:text="user_self_description"
         app:layout_constraintStart_toStartOf="@+id/tv_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        tools:text="user_self_description" />
 
     <ImageView
-        android:id="@+id/iv_item_friend_use_melon"
+        android:id="@+id/iv_birthday_friend_item_use_melon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_profile"
+        app:layout_constraintTop_toTopOf="@+id/iv_birthday_friend_item_profile"
         app:srcCompat="@android:drawable/ic_media_play" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

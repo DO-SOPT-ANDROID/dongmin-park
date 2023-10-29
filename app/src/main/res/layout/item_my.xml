@@ -7,7 +7,7 @@
     android:layout_margin="20dp">
 
     <ImageView
-        android:id="@+id/iv_profile"
+        android:id="@+id/iv_my_item_profile"
         android:layout_width="80dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -17,24 +17,24 @@
         tools:src="@drawable/iv_profile" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_my_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/iv_profile"
-        app:layout_constraintTop_toTopOf="@id/iv_profile"
+        app:layout_constraintStart_toEndOf="@id/iv_my_item_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_my_item_profile"
         tools:text="user_name" />
 
     <TextView
-        android:id="@+id/tv_self_decription"
+        android:id="@+id/tv_my_item_self_decription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:maxLines="1"
-        app:layout_constraintStart_toStartOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        app:layout_constraintStart_toStartOf="@id/tv_my_item_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_item_name"
         tools:text="user_self_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
