@@ -1,6 +1,7 @@
 package org.sopt.dosopttemplate
 
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import org.sopt.dosopttemplate.databinding.ItemMyBinding
 import org.sopt.dosopttemplate.model.HumanModel
 
@@ -9,7 +10,10 @@ class MyViewHolder(private val binding: ItemMyBinding) :
 
     fun onBind(friendData: HumanModel.MyModel) =
         with(binding) {
-            ivProfile.setImageResource(friendData.profileImage)
+            ivProfile.load(friendData.profileImage) {
+                error(R.drawable.img_error)
+                placeholder(R.drawable.img_placeholder)
+            }
             tvName.text = friendData.name
             tvSelfDecription.text = friendData.aboutMe
         }
