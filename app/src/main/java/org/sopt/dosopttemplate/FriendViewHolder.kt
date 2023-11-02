@@ -11,12 +11,12 @@ class FriendViewHolder(private val binding: ItemFriendBinding) :
 
     fun onBind(friendData: HumanModel.FriendModel) =
         with(binding) {
-            ivProfile.load(friendData.profileImage) {
+            ivFriendItemProfile.load(friendData.profileImage) {
                 error(R.drawable.img_error)
                 placeholder(R.drawable.img_placeholder)
             }
-            tvName.text = friendData.name
-            tvSelfDecription.text = friendData.aboutMe
-            ivItemFriendUseMelon.isVisible = friendData.useMelon
+            tvFriendItemName.text = friendData.name
+            tvFriendItemSelfDecription.text = friendData.aboutMe
+            ivFriendItemUseMelon.isVisible = friendData.useMelon
         }
 }

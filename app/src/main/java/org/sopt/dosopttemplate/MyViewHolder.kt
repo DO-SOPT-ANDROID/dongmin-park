@@ -10,11 +10,11 @@ class MyViewHolder(private val binding: ItemMyBinding) :
 
     fun onBind(friendData: HumanModel.MyModel) =
         with(binding) {
-            ivProfile.load(friendData.profileImage) {
+            ivMyItemProfile.load(friendData.profileImage) {
                 error(R.drawable.img_error)
                 placeholder(R.drawable.img_placeholder)
             }
-            tvName.text = friendData.name
-            tvSelfDecription.text = friendData.aboutMe
+            tvMyItemName.text = friendData.name
+            tvMyItemSelfDecription.text = friendData.aboutMe
         }
 }

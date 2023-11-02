@@ -17,7 +17,7 @@
         tools:src="@drawable/iv_profile" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_birthday_friend_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -32,9 +32,9 @@
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-        app:layout_constraintStart_toEndOf="@+id/tv_name"
-        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_birthday_friend_item_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_birthday_friend_item_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_birthday_friend_item_name"
         app:srcCompat="@android:drawable/star_on" />
 
     <TextView
@@ -42,8 +42,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        app:layout_constraintStart_toStartOf="@+id/tv_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        app:layout_constraintStart_toStartOf="@+id/tv_birthday_friend_item_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_birthday_friend_item_name"
         tools:text="user_self_description" />
 
     <ImageView

@@ -10,11 +10,11 @@ class FriendBirthdayViewHolder(private val binding: ItemBirthdayFriendBinding) :
 
     fun onBind(friendData: HumanModel.FriendBirthdayModel) =
         with(binding) {
-            ivProfile.load(friendData.profileImage) {
+            ivBirthdayFriendItemProfile.load(friendData.profileImage) {
                 error(R.drawable.img_error)
                 placeholder(R.drawable.img_placeholder)
             }
-            tvName.text = friendData.name
-            tvSelfDecription.text = friendData.aboutMe
+            tvBirthdayFriendItemName.text = friendData.name
+            tvBirthdayFriendItemSelfDecription.text = friendData.aboutMe
         }
 }
