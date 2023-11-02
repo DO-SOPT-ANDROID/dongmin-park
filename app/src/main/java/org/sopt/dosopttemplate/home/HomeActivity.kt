@@ -42,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
         binding.bnvHome.run {
             setOnItemReselectedListener { item ->
                 when(item.itemId){
-                    R.id.menu_home -> {6
+                    R.id.menu_home -> {
                         val homeFragment: HomeFragment = supportFragmentManager.findFragmentById(R.id.fcv_home) as HomeFragment
                         homeFragment.scrollToTop()
                         true
