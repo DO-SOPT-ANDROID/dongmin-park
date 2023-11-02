@@ -27,4 +27,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.rvHumans.adapter = humanAdapter
         humanAdapter.addHumanList(viewModel.mockFriendList)
     }
+
+    fun scrollToTop(){
+        binding.rvHumans.smoothScrollToPosition(0)
+    }
 }
