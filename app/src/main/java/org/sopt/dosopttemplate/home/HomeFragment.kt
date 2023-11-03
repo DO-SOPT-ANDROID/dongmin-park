@@ -25,10 +25,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         val humanAdapter = HumanAdapter(requireContext())
         binding.rvHumans.adapter = humanAdapter
-        humanAdapter.addHumanList(viewModel.mockFriendList)
+
+        humanAdapter.submitList(viewModel.mockFriendList)
     }
 
-    fun scrollToTop(){
+    fun scrollToTop() {
         binding.rvHumans.smoothScrollToPosition(0)
     }
 }
