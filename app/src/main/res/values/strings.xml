@@ -48,4 +48,10 @@
     <string name="DO_SOPT">DO SOPT</string>
     <string name="HOME">HOME</string>
     <string name="MY_PAGE">MY PAGE</string>
+
+    <!-- mypaget_fragment-->
+    <string name="LOGOUT">Logout</string>
+    <string name="LOGOUT_MESSAGE">정말로 로그아웃하시겠습니까?</string>
+    <string name="LOGOUT_SUCCESS">로그아웃 성공</string>
+    <string name="CANCEL">취소</string>
 </resources>

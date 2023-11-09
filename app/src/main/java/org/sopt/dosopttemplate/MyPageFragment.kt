@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import org.sopt.dosopttemplate.base.BaseFragment
 import org.sopt.dosopttemplate.databinding.FragmentMyPageBinding
+import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
     private lateinit var listener: OnFragmentListener
@@ -38,19 +39,20 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
         }
 
     private fun editProfileInfo(){
-        binding.fabMyPageEditInfo.setOnClickListener {
+        binding.fabMyPageLogout.setOnClickListener {
             openDialog()
         }
     }
 
     private fun openDialog(){
         val builder = AlertDialog.Builder(this.context)
-            .setTitle("로그아웃?")
-            .setMessage("진짜?")
-            .setPositiveButton("확인"){ dialog, which ->
+            .setTitle(R.string.LOGOUT)
+            .setMessage(R.string.LOGOUT_MESSAGE)
+            .setPositiveButton(R.string.LOGOUT){ dialog, which ->
+                makeToast(this.requireContext(), getString(R.string.LOGOUT_SUCCESS))
                 listener.moveLoginActivity()
             }
-            .setNegativeButton("취소"){ dialog, which ->  }
+            .setNegativeButton(R.string.CANCEL){ dialog, which ->  }
 
         builder.show()
     }
