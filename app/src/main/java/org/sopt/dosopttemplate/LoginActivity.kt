@@ -41,8 +41,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
     private fun setIDPW(result: ActivityResult) {
         user = result.data?.getParcelable("USER", User::class.java) ?: return
 
-        binding.etvLoginId.setText(user?.id)
-        binding.etvLoginPw.setText(user?.pw)
+        binding.etvLoginId.setText(user.id)
+        binding.etvLoginPw.setText(user.pw)
     }
 
     private fun checkLoginAvailable() {

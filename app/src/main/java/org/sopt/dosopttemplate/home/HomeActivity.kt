@@ -39,6 +39,30 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun clickBottomNavigation() {
+        binding.bnvHome.run {
+            setOnItemReselectedListener { item ->
+                when(item.itemId){
+                    R.id.menu_home -> {
+                        val homeFragment: HomeFragment = supportFragmentManager.findFragmentById(R.id.fcv_home) as HomeFragment
+                        homeFragment.scrollToTop()
+                        true
+                    }
+
+                    R.id.menu_do_android -> {
+                        // do nothing
+                        true
+                    }
+
+                    R.id.menu_mypage -> {
+                        // do nothing
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }
+
         binding.bnvHome.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {

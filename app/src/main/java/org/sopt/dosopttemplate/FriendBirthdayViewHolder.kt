@@ -14,7 +14,7 @@ class FriendBirthdayViewHolder(private val binding: ItemBirthdayFriendBinding) :
                 error(R.drawable.img_error)
                 placeholder(R.drawable.img_placeholder)
             }
-            tvBirthdayFriendItemName.text = friendData.name
+            tvName.text = friendData.name
             tvBirthdayFriendItemSelfDecription.text = friendData.aboutMe
         }
 }
