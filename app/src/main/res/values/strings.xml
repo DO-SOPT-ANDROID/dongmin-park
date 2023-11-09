@@ -44,4 +44,8 @@
     <!-- success_message -->
     <string name="LOGIN_SUCCESS">로그인 성공</string>
 
+    <!-- bottom_navigation -->
+    <string name="DO_SOPT">DO SOPT</string>
+    <string name="HOME">HOME</string>
+    <string name="MY_PAGE">MY PAGE</string>
 </resources>

@@ -1,12 +1,13 @@
 package org.sopt.dosopttemplate
 
 import android.os.Bundle
-import org.sopt.dosopttemplate.Model.User
+import org.sopt.dosopttemplate.base.BaseActivity
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
+import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.utilprivate.makeToast
 import java.util.regex.Pattern
 
-class SignUpActivity : BaseActivity<ActivitySignupBinding>({ActivitySignupBinding.inflate(it)}) {
+class SignUpActivity : BaseActivity<ActivitySignupBinding>({ ActivitySignupBinding.inflate(it) }) {
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +18,7 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>({ActivitySignupBindin
         signup()
     }
 
-    private fun signup() {
+    private fun signup() =
         binding.btnSignupNaviLogin.setOnClickListener {
             user = with(binding) {
                 User(
@@ -34,7 +35,7 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>({ActivitySignupBindin
             else
                 signupFailed(user)
         }
-    }
+
 
     private fun allCorrect(user: User) = isIDCorrect(user.id.length) &&
             isPWCorrect(user.pw.length) &&

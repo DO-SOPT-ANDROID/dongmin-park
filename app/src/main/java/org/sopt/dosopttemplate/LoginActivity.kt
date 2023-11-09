@@ -6,8 +6,10 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import org.sopt.dosopttemplate.Model.User
+import org.sopt.dosopttemplate.base.BaseActivity
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
+import org.sopt.dosopttemplate.home.HomeActivity
+import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
@@ -64,14 +66,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
     private fun isIDCorrect(ID: String) = user.id == ID
     private fun isPWCorrect(PW: String) = user.pw == PW
 
-    private fun loginSuccessed(){
-        makeToast(this, getString(R.string.LOGIN_SUCCESS))
-        moveMainActivity()
+    private fun loginSuccessed() {
+        moveHomeActivity()
         finish()
     }
 
-    private fun moveMainActivity() =
-        Intent(this, MainActivity::class.java).apply {
+    private fun moveHomeActivity() =
+        Intent(this, HomeActivity::class.java).apply {
             putExtra("USER", user)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
@@ -85,17 +86,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
         makeToast(this, text)
     }
 
-    private fun signUpBtn() {
+    private fun signUpBtn() =
         binding.btnLoginNaviSignUp.setOnClickListener {
             moveSignUpActivity()
         }
-    }
 
-    private fun moveSignUpActivity() {
+    private fun moveSignUpActivity() =
         resultLauncher.launch(
             Intent(this, SignUpActivity::class.java).apply {
                 this
             }
         )
-    }
 }

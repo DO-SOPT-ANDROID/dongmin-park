@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="30dp"
-    android:paddingVertical="60dp"
-    tools:context=".LoginActivity">
+    android:paddingVertical="60dp">
 
     <ImageView
         android:id="@+id/iv_main_user"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:src="@drawable/profileimage"
+        android:src="@drawable/iv_profile"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -80,5 +78,6 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/tv_main_mbti_title"
         app:layout_constraintTop_toBottomOf="@id/tv_main_mbti_title" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
