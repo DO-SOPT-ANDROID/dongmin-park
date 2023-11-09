@@ -13,7 +13,7 @@ import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var userInfo: User
 
@@ -121,7 +121,7 @@ class HomeActivity : AppCompatActivity() {
             )
     }
 
-    private fun moveLoginActivity() =
+    override fun moveLoginActivity() =
         Intent(this, LoginActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
