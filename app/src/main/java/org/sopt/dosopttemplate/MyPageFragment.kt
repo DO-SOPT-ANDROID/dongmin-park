@@ -12,11 +12,11 @@ import org.sopt.dosopttemplate.databinding.FragmentMyPageBinding
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
-    private lateinit var listener: OnFragmentListener
+    private lateinit var moveLoginListener: OnFragmentListener
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentMyPageBinding =FragmentMyPageBinding.inflate(inflater, container, false)
+    ): FragmentMyPageBinding = FragmentMyPageBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,8 +26,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
         editProfileInfo()
     }
 
-    private fun setListener(){
-        listener = context as OnFragmentListener
+    private fun setListener() {
+        moveLoginListener = context as OnFragmentListener
     }
 
     private fun setUserInfo() =
@@ -38,21 +38,21 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
             tvMainAboutMe.text = arguments?.getString(ARGS_ABOUTME)
         }
 
-    private fun editProfileInfo(){
+    private fun editProfileInfo() {
         binding.fabMyPageLogout.setOnClickListener {
             openDialog()
         }
     }
 
-    private fun openDialog(){
+    private fun openDialog() {
         val builder = AlertDialog.Builder(this.context)
             .setTitle(R.string.LOGOUT)
             .setMessage(R.string.LOGOUT_MESSAGE)
-            .setPositiveButton(R.string.LOGOUT){ dialog, which ->
+            .setPositiveButton(R.string.LOGOUT) { dialog, which ->
                 makeToast(this.requireContext(), getString(R.string.LOGOUT_SUCCESS))
-                listener.moveLoginActivity()
+                moveLoginListener.moveLoginActivity()
             }
-            .setNegativeButton(R.string.CANCEL){ dialog, which ->  }
+            .setNegativeButton(R.string.CANCEL) { dialog, which -> }
 
         builder.show()
     }
