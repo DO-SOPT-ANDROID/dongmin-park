@@ -101,15 +101,16 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private fun setUser() {
         lateinit var text: String
 
-        try {
+        runCatching {
             getUserInfo()
+        }.fold(
+            onSuccess = { text = getString(R.string.LOGIN_SUCCESS)},
+            onFailure = {e ->
+                moveLoginActivity()
 
-            text = getString(R.string.LOGIN_SUCCESS)
-        } catch (e: IllegalArgumentException) {
-            moveLoginActivity()
-
-            text = e.message.toString()
-        } finally {
+                text = e.message.toString()
+            }
+        ).also {
             makeToast(this, text)
         }
     }
