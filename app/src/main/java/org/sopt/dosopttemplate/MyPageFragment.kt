@@ -23,7 +23,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
 
         setListener()
         setUserInfo()
-        editProfileInfo()
+        logoutBtn()
     }
 
     private fun setListener() {
@@ -38,7 +38,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
             tvMainAboutMe.text = arguments?.getString(ARGS_ABOUTME)
         }
 
-    private fun editProfileInfo() {
+    private fun logoutBtn() {
         binding.fabMyPageLogout.setOnClickListener {
             openDialog()
         }
