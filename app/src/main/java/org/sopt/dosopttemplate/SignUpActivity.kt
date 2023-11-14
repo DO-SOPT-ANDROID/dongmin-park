@@ -1,10 +1,15 @@
 package org.sopt.dosopttemplate
 
 import android.os.Bundle
+import android.util.Log
+import org.sopt.dosopttemplate.ServicePool.authService
 import org.sopt.dosopttemplate.base.BaseActivity
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.model.User
+import org.sopt.dosopttemplate.model.requestModel.RequestSignupDto
 import org.sopt.dosopttemplate.utilprivate.makeToast
+import retrofit2.Call
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class SignUpActivity : BaseActivity<ActivitySignupBinding>({ ActivitySignupBinding.inflate(it) }) {
@@ -20,20 +25,44 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>({ ActivitySignupBindi
 
     private fun signup() =
         binding.btnSignupNaviLogin.setOnClickListener {
-            user = with(binding) {
-                User(
-                    id = etvSignupId.text.toString(),
-                    pw = etvSignupPw.text.toString(),
-                    nickname = etvSignupNickname.text.toString(),
-                    mbti = etvSignupMbti.text.toString().uppercase(),
-                    aboutMe = etvSignupAboutMe.text.toString()
-                )
-            }
+            val username = binding.etvSignupId.text.toString()
+            val password = binding.etvSignupPw.text.toString()
+            val nickname = binding.etvSignupNickname.text.toString()
+            Log.e("TAG", "signup: $username , $password, $nickname", )
 
-            if (allCorrect(user))
-                signupSuccessed()
-            else
-                signupFailed(user)
+            authService.signup(RequestSignupDto(username, password, nickname))
+                .enqueue(object : retrofit2.Callback<Unit> {
+                    override fun onResponse(
+                        call: Call<Unit>,
+                        response: Response<Unit>,
+                    ) {
+                        if (response.isSuccessful) {
+                            makeToast(this@SignUpActivity, "회원가입 성공")
+                            setResult(RESULT_OK, intent)
+                            finish()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        makeToast(this@SignUpActivity, "서버 오류")
+                    }
+                })
+
+
+//            user = with(binding) {
+//                User(
+//                    id = etvSignupId.text.toString(),
+//                    pw = etvSignupPw.text.toString(),
+//                    nickname = etvSignupNickname.text.toString(),
+//                    mbti = etvSignupMbti.text.toString().uppercase(),
+//                    aboutMe = etvSignupAboutMe.text.toString()
+//                )
+//            }
+//
+//            if (allCorrect(user))
+//                signupSuccessed()
+//            else
+//                signupFailed(user)
         }
 
 

@@ -13,8 +13,8 @@ import org.sopt.dosopttemplate.SignUpActivity
 import org.sopt.dosopttemplate.base.BaseActivity
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.home.HomeActivity
-import org.sopt.dosopttemplate.login.requestModel.RequestLoginDto
-import org.sopt.dosopttemplate.login.responseModel.ResponseLoginDto
+import org.sopt.dosopttemplate.model.requestModel.RequestLoginDto
+import org.sopt.dosopttemplate.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast

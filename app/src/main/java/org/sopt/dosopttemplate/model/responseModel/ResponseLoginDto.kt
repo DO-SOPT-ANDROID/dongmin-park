@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.login.responseModel
+package org.sopt.dosopttemplate.model.responseModel
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
