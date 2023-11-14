@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.sopt.dosopttemplate.DoAndroidFragment
-import org.sopt.dosopttemplate.LoginActivity
 import org.sopt.dosopttemplate.MyPageFragment
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
+import org.sopt.dosopttemplate.login.LoginActivity
 import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
@@ -41,9 +41,10 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private fun clickBottomNavigation() {
         binding.bnvHome.run {
             setOnItemReselectedListener { item ->
-                when(item.itemId){
+                when (item.itemId) {
                     R.id.menu_home -> {
-                        val homeFragment: HomeFragment = supportFragmentManager.findFragmentById(R.id.fcv_home) as HomeFragment
+                        val homeFragment: HomeFragment =
+                            supportFragmentManager.findFragmentById(R.id.fcv_home) as HomeFragment
                         homeFragment.scrollToTop()
                         true
                     }
@@ -104,8 +105,8 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
         runCatching {
             getUserInfo()
         }.fold(
-            onSuccess = { text = getString(R.string.LOGIN_SUCCESS)},
-            onFailure = {e ->
+            onSuccess = { text = getString(R.string.LOGIN_SUCCESS) },
+            onFailure = { e ->
                 moveLoginActivity()
 
                 text = e.message.toString()
