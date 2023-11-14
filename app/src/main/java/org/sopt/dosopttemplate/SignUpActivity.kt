@@ -47,22 +47,6 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>({ ActivitySignupBindi
                         makeToast(this@SignUpActivity, "서버 오류")
                     }
                 })
-
-
-//            user = with(binding) {
-//                User(
-//                    id = etvSignupId.text.toString(),
-//                    pw = etvSignupPw.text.toString(),
-//                    nickname = etvSignupNickname.text.toString(),
-//                    mbti = etvSignupMbti.text.toString().uppercase(),
-//                    aboutMe = etvSignupAboutMe.text.toString()
-//                )
-//            }
-//
-//            if (allCorrect(user))
-//                signupSuccessed()
-//            else
-//                signupFailed(user)
         }
 
 

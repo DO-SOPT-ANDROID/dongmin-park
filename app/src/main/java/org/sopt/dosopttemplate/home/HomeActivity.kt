@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
 
         connectFragemnt()
         clickBottomNavigation()
-        setUser()
+        //setUser()
     }
 
     private fun connectFragemnt() {

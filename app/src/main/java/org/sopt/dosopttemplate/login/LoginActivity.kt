@@ -81,7 +81,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
 
     private fun moveHomeActivity() =
         Intent(this, HomeActivity::class.java).apply {
-            putExtra("USER", user)
+            //putExtra("USER", user)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
         }
