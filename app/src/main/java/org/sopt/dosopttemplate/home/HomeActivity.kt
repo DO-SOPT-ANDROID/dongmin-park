@@ -2,6 +2,7 @@ package org.sopt.dosopttemplate.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.sopt.dosopttemplate.DoAndroidFragment
@@ -12,6 +13,11 @@ import org.sopt.dosopttemplate.login.LoginActivity
 import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
+import org.sopt.dosopttemplate.ServicePool.userService
+import org.sopt.dosopttemplate.model.responseModel.ResponseListUserDto
+import org.sopt.dosopttemplate.model.responseModel.ResponseLoginDto
+import retrofit2.Call
+import retrofit2.Response
 
 class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private lateinit var binding: ActivityHomeBinding
@@ -24,6 +30,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
 
         connectFragemnt()
         clickBottomNavigation()
+        getUserList()
         //setUser()
     }
 
@@ -98,6 +105,25 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
             .replace(R.id.fcv_home, fragment)
             .commit()
 
+    private fun getUserList(){
+        userService.getUserList(2).enqueue(
+            object : retrofit2.Callback<ResponseListUserDto> {
+                override fun onResponse(
+                    call: Call<ResponseListUserDto>,
+                    response: Response<ResponseListUserDto>
+                ) {
+                    makeToast(this@HomeActivity, "성공성공")
+                    Log.e("TAG", "성공성공")
+                }
+
+                override fun onFailure(call: Call<ResponseListUserDto>, t: Throwable) {
+                    makeToast(this@HomeActivity, "실패실패")
+                    Log.e("TAG", "실패실패")
+                }
+
+            }
+        )
+    }
 
     private fun setUser() {
         lateinit var text: String
