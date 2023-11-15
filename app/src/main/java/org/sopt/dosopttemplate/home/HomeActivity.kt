@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
 
         connectFragemnt()
         clickBottomNavigation()
-        getUserList()
+        //getUserList()
         //setUser()
     }
 
@@ -104,26 +104,6 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcv_home, fragment)
             .commit()
-
-    private fun getUserList(){
-        userService.getUserList(2).enqueue(
-            object : retrofit2.Callback<ResponseListUserDto> {
-                override fun onResponse(
-                    call: Call<ResponseListUserDto>,
-                    response: Response<ResponseListUserDto>
-                ) {
-                    makeToast(this@HomeActivity, "성공성공")
-                    Log.e("TAG", "성공성공")
-                }
-
-                override fun onFailure(call: Call<ResponseListUserDto>, t: Throwable) {
-                    makeToast(this@HomeActivity, "실패실패")
-                    Log.e("TAG", "실패실패")
-                }
-
-            }
-        )
-    }
 
     private fun setUser() {
         lateinit var text: String
