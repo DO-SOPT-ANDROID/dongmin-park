@@ -1,18 +1,17 @@
 package org.sopt.dosopttemplate
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import org.sopt.dosopttemplate.databinding.ItemUsersBinding
 import org.sopt.dosopttemplate.model.responseModel.ResponseListUserUserDto
+import org.sopt.dosopttemplate.util.ItemDiffCallback
 
-class UserAdapter(context: Context) : RecyclerView.Adapter<UserViewHolder>() {
+class UserAdapter(context: Context) : ListAdapter<ResponseListUserUserDto, UserViewHolder>(
+    UserDiffCallback
+) {
     private val inflater by lazy { LayoutInflater.from(context) }
-
-    // 임시의 빈 리스트
-    private var userList: List<ResponseListUserUserDto> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding = ItemUsersBinding.inflate(inflater, parent, false)
@@ -20,14 +19,16 @@ class UserAdapter(context: Context) : RecyclerView.Adapter<UserViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.onBind(userList[position])
+        holder.onBind(currentList[position])
     }
 
-    override fun getItemCount() = userList.size
+    override fun getItemCount() = currentList.size
 
-    // 임시 리스트에 준비해둔 가짜 리스트를 연결하는 함수
-    fun setUserList(userList: List<ResponseListUserUserDto>) {
-        this.userList = userList.toList()
-        notifyDataSetChanged()
+    companion object {
+        private val UserDiffCallback =
+            ItemDiffCallback<ResponseListUserUserDto>(
+                onItemsTheSame = { old, new -> old.id == new.id },
+                onContentsTheSame = { old, new -> old == new }
+            )
     }
 }

@@ -20,6 +20,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val viewModel by viewModels<HomeViewModel>()
 
     private var mockUserList = listOf<ResponseListUserUserDto>()
+    lateinit var userAdapter: UserAdapter
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -35,16 +36,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //        val humanAdapter = HumanAdapter(requireContext())
 //        binding.rvHumans.adapter = humanAdapter
 
-        val userAdapter = UserAdapter(requireContext())
+        //val userAdapter = UserAdapter(requireContext())
+        userAdapter = UserAdapter(requireContext())
         binding.rvHumans.adapter = userAdapter
 
         getUserList()
 
-
-        val handler = Handler() // 임시로 값 api 에서 들어오는지 확인하기 위한 delay. 삭제 예정
-        handler.postDelayed(Runnable {
-            userAdapter.setUserList(mockUserList)
-        }, 3000)
+//
+//        val handler = Handler() // 임시로 값 api 에서 들어오는지 확인하기 위한 delay. 삭제 예정
+//        handler.postDelayed(Runnable {
+//            userAdapter.setUserList(mockUserList)
+//        }, 3000)
 
     }
 
@@ -57,6 +59,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 ) {
                     Log.e("TAG", "성공성공")
                     mockUserList = response.body()?.data?: return
+
+                    userAdapter.submitList(mockUserList)
                 }
 
                 override fun onFailure(call: Call<ResponseListUserDto>, t: Throwable) {
