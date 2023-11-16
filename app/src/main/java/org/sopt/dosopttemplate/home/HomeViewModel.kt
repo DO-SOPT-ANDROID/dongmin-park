@@ -1,10 +1,20 @@
 package org.sopt.dosopttemplate.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.model.HumanModel
 
 class HomeViewModel : ViewModel() {
+    private val _tempList = MutableLiveData<List<HumanModel>>()
+    val tempList: LiveData<List<HumanModel>> =
+        _tempList // LiveData -> Flow로 바꾸는게 권장사항. 근데 또 아닐때도 있다네 허허 ?때려칠까
+
+    fun testFUn(test: List<HumanModel>) {
+        _tempList.value = test.toList()
+    }
+
     val mockFriendList: List<HumanModel> = listOf(
         HumanModel.MyModel(
             1,

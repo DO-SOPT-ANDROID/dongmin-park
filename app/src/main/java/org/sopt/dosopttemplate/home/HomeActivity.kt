@@ -31,7 +31,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
         connectFragemnt()
         clickBottomNavigation()
         //getUserList()
-        //setUser()
+        setUser()
     }
 
     private fun connectFragemnt() {
@@ -87,9 +87,8 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
                     replaceFragment(
                         MyPageFragment.newInstance(
                             id = userInfo.id,
-                            aboutMe = userInfo.aboutMe,
+                            username = userInfo.username,
                             nickname = userInfo.nickname,
-                            mbti = userInfo.mbti
                         )
                     )
                     true

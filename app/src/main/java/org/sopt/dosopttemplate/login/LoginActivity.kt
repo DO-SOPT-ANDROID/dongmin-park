@@ -3,11 +3,9 @@ package org.sopt.dosopttemplate.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.ServicePool.authService
 import org.sopt.dosopttemplate.SignUpActivity
 import org.sopt.dosopttemplate.base.BaseActivity
@@ -23,7 +21,6 @@ import retrofit2.Response
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.inflate(it) }) {
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +28,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
         setContentView(binding.root)
 
         getIntentInfo()
-
-        //checkLoginAvailable()
-        login()
+        loginBtn()
         signUpBtn()
     }
 
@@ -47,52 +42,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
     }
 
     private fun setIDPW(result: ActivityResult) {
-        user = result.data?.getParcelable("USER", User::class.java) ?: return
+        val id = result.data?.getStringExtra("ID")
+        val pw = result.data?.getStringExtra("PW")
 
-        binding.etvLoginId.setText(user.id)
-        binding.etvLoginPw.setText(user.pw)
+        binding.etvLoginId.setText(id)
+        binding.etvLoginPw.setText(pw)
     }
 
-    private fun checkLoginAvailable() {
-        binding.btnLoginNaviLogIn.setOnClickListener {
-            if (!::user.isInitialized) {
-                makeToast(this, getString(R.string.LOGIN_SIGN_UP_ERROR))
-                return@setOnClickListener
-            }
-
-            val id = binding.etvLoginId.text.toString()
-            val pw = binding.etvLoginPw.text.toString()
-
-            val isIdCorrect = isIDCorrect(id)
-            val isPwCorrect = isPWCorrect(pw)
-
-            if (isIdCorrect && isPwCorrect) loginSuccessed()
-            else loginFailed(isIdCorrect, isPwCorrect)
-        }
-    }
-
-    private fun isIDCorrect(ID: String) = user.id == ID
-    private fun isPWCorrect(PW: String) = user.pw == PW
-
-    private fun loginSuccessed() {
-        moveHomeActivity()
-        finish()
-    }
-
-    private fun moveHomeActivity() =
+    private fun moveHomeActivity(user: User) =
         Intent(this, HomeActivity::class.java).apply {
-            //putExtra("USER", user)
+            putExtra("USER", user)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
         }
-
-    private fun loginFailed(isIdCorrect: Boolean, isPwCorrect: Boolean) {
-        val text = if (!isIdCorrect) getString(R.string.ID_ERROR)
-        else if (!isPwCorrect) getString(R.string.PW_ERROR)
-        else getString(R.string.DEFAULT_ERROR)
-
-        makeToast(this, text)
-    }
 
     private fun signUpBtn() =
         binding.btnLoginNaviSignUp.setOnClickListener {
@@ -106,8 +68,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
             }
         )
 
-    private fun login() {
-        binding.btnLoginNaviLogIn.setOnClickListener{
+    private fun loginBtn() {
+        binding.btnLoginNaviLogIn.setOnClickListener {
             val id = binding.etvLoginId.text.toString()
             val password = binding.etvLoginPw.text.toString()
 
@@ -120,9 +82,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ ActivityLoginBinding.
                         if (response.isSuccessful) {
                             val data: ResponseLoginDto = response.body()!!
                             val userId = data.id
+                            val username = data.username
+                            val nickname = data.nickname
+                            val user = User(id = userId, username = username, nickname = nickname)
+
                             makeToast(this@LoginActivity, "로그인이 성공하였고 유저의 ID는 $userId 입니둥")
 
-                            moveHomeActivity()
+                            moveHomeActivity(user)
                         }
                     }
 
