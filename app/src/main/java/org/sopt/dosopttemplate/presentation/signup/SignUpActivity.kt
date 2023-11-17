@@ -1,6 +1,7 @@
 package org.sopt.dosopttemplate.presentation.signup
 
 import android.os.Bundle
+import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.base.BaseActivity
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
 import org.sopt.dosopttemplate.model.requestModel.RequestSignupDto
@@ -31,13 +32,14 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>({ ActivitySignupBindi
                         response: Response<Unit>,
                     ) {
                         if (response.isSuccessful) {
-                            makeToast(this@SignUpActivity, "회원가입 성공")
+                            makeToast(this@SignUpActivity, getString(R.string.SIGNUP_SUCCESS))
                             signupSuccessed(username, password)
-                        }
+                        } else
+                            makeToast(this@SignUpActivity, getString(R.string.SIGNUP_ERROR))
                     }
 
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        makeToast(this@SignUpActivity, "서버 오류")
+                        makeToast(this@SignUpActivity, getString(R.string.SERVER_ERROR))
                     }
                 })
         }
