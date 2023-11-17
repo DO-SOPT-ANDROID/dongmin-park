@@ -1,12 +1,10 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.server.service
 
 import org.sopt.dosopttemplate.model.requestModel.RequestLoginDto
 import org.sopt.dosopttemplate.model.requestModel.RequestSignupDto
 import org.sopt.dosopttemplate.model.responseModel.ResponseLoginDto
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthService {

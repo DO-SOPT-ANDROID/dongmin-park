@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="30dp"
     android:paddingVertical="60dp"
-    tools:context=".login.LoginActivity">
+    tools:context=".presentation.login.LoginActivity">
 
     <TextView
         android:id="@+id/tv_signup_title"

@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.server.service
 
 import org.sopt.dosopttemplate.model.responseModel.ResponseListUserDto
 import retrofit2.Call

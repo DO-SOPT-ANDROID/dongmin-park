@@ -1,7 +1,8 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.presentation.home.user
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ItemUsersBinding
 import org.sopt.dosopttemplate.model.responseModel.ResponseListUserUserDto
 

@@ -8,4 +8,4 @@ data class User(
     val id: Int,
     val username: String,
     val nickname: String,
-): Parcelable
+) : Parcelable

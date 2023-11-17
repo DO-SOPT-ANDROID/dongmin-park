@@ -1,25 +1,20 @@
-package org.sopt.dosopttemplate.home
+package org.sopt.dosopttemplate.presentation.home.user
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.sopt.dosopttemplate.ServicePool.userService
-import org.sopt.dosopttemplate.UserAdapter
-import org.sopt.dosopttemplate.UserViewModel
+import org.sopt.dosopttemplate.server.ServicePool.userService
+import org.sopt.dosopttemplate.presentation.home.user.UserAdapter
+import org.sopt.dosopttemplate.presentation.home.user.UserViewModel
 import org.sopt.dosopttemplate.base.BaseFragment
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
 import org.sopt.dosopttemplate.model.responseModel.ResponseListUserDto
-import org.sopt.dosopttemplate.utilprivate.makeToast
 import retrofit2.Call
 import retrofit2.Response
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class UserFragment : BaseFragment<FragmentHomeBinding>() {
     private val viewModel by activityViewModels<UserViewModel>()
     lateinit var userAdapter: UserAdapter
 

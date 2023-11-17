@@ -1,12 +1,10 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.presentation.signup
 
 import android.os.Bundle
-import android.util.Log
-import org.sopt.dosopttemplate.ServicePool.authService
 import org.sopt.dosopttemplate.base.BaseActivity
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
-import org.sopt.dosopttemplate.model.User
 import org.sopt.dosopttemplate.model.requestModel.RequestSignupDto
+import org.sopt.dosopttemplate.server.ServicePool.authService
 import org.sopt.dosopttemplate.utilprivate.makeToast
 import retrofit2.Call
 import retrofit2.Response

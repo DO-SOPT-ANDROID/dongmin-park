@@ -1,23 +1,18 @@
-package org.sopt.dosopttemplate.home
+package org.sopt.dosopttemplate.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import org.sopt.dosopttemplate.DoAndroidFragment
-import org.sopt.dosopttemplate.MyPageFragment
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
-import org.sopt.dosopttemplate.login.LoginActivity
 import org.sopt.dosopttemplate.model.User
+import org.sopt.dosopttemplate.presentation.home.doandroid.DoAndroidFragment
+import org.sopt.dosopttemplate.presentation.home.mypage.MyPageFragment
+import org.sopt.dosopttemplate.presentation.home.user.UserFragment
+import org.sopt.dosopttemplate.presentation.login.LoginActivity
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
-import org.sopt.dosopttemplate.ServicePool.userService
-import org.sopt.dosopttemplate.model.responseModel.ResponseListUserDto
-import org.sopt.dosopttemplate.model.responseModel.ResponseLoginDto
-import retrofit2.Call
-import retrofit2.Response
 
 class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private lateinit var binding: ActivityHomeBinding
@@ -30,7 +25,6 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
 
         connectFragemnt()
         clickBottomNavigation()
-        //getUserList()
         setUser()
     }
 
@@ -40,7 +34,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
             binding.bnvHome.selectedItemId = R.id.menu_home
 
             supportFragmentManager.beginTransaction()
-                .add(R.id.fcv_home, HomeFragment())
+                .add(R.id.fcv_home, UserFragment())
                 .commit()
         }
     }
@@ -50,9 +44,9 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
             setOnItemReselectedListener { item ->
                 when (item.itemId) {
                     R.id.menu_home -> {
-                        val homeFragment: HomeFragment =
-                            supportFragmentManager.findFragmentById(R.id.fcv_home) as HomeFragment
-                        homeFragment.scrollToTop()
+                        val userFragment: UserFragment =
+                            supportFragmentManager.findFragmentById(R.id.fcv_home) as UserFragment
+                        userFragment.scrollToTop()
                         true
                     }
 
@@ -74,7 +68,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
         binding.bnvHome.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {
-                    replaceFragment(HomeFragment())
+                    replaceFragment(UserFragment())
                     true
                 }
 
@@ -110,7 +104,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
         runCatching {
             getUserInfo()
         }.fold(
-            onSuccess = { text = getString(R.string.LOGIN_SUCCESS) },
+            onSuccess = { text = getString(R.string.LOGIN_SUCCESS) + "\nuserid : ${userInfo.id}" },
             onFailure = { e ->
                 moveLoginActivity()
 
@@ -124,7 +118,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private fun getUserInfo() {
         userInfo =
             intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException(
-                "뭐에요. 내 user 정보 돌려줘요"
+                getString(R.string.USER_INFO_ERROR)
             )
     }
 

@@ -30,16 +30,9 @@
 
 
     <!-- error_message -->
-    <string name="ID_ERROR">ID를 6~10자 사이로 해주세요</string>
-    <string name="PW_ERROR">PW를 8~12자 사이로 해주세요</string>
-    <string name="NICKNAME_ERROR">닉네임을 공백 제외 1자 이상 해주세요</string>
-    <string name="MBTI_ERROR">MBTI는 영문 4개로 설정해주세요</string>
-    <string name="ABOUT_ME_ERROR">자기소개를 공백 제외 1자 이상 해주세요</string>
-    <string name="DEFAULT_ERROR">다시 시도해주세요</string>
-
-    <string name="LOGIN_ID_ERROR">ID가 잘못되었습니다</string>
-    <string name="LOGIN_PW_ERROR">PW가 잘못되었습니다</string>
-    <string name="LOGIN_SIGN_UP_ERROR">회원가입된 정보가 없습니다</string>
+    <string name="SERVER_ERROR">서버 에러 발생</string>
+    <string name="BINDING_ERROR">바인딩 객체가 생성되지 않았습니다</string>
+    <string name="USER_INFO_ERROR">유효한 유저정보가 없습니다</string>
 
     <!-- success_message -->
     <string name="LOGIN_SUCCESS">로그인 성공</string>

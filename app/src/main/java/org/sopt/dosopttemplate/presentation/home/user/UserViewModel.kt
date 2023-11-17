@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.presentation.home.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
