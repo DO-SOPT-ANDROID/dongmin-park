@@ -41,11 +41,10 @@
         android:id="@+id/tv_user_item_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/tv_user_item_last_name"
-        app:layout_constraintTop_toTopOf="@id/tv_user_item_last_name"
+        app:layout_constraintStart_toStartOf="@id/tv_user_item_first_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_item_first_name"
         tools:text="email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
