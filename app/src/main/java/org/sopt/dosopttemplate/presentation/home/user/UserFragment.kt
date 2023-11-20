@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.server.ServicePool.userService
 import org.sopt.dosopttemplate.presentation.home.user.UserAdapter
 import org.sopt.dosopttemplate.presentation.home.user.UserViewModel
 import org.sopt.dosopttemplate.base.BaseFragment
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
 import org.sopt.dosopttemplate.model.responseModel.ResponseListUserDto
+import org.sopt.dosopttemplate.utilprivate.makeToast
 import retrofit2.Call
 import retrofit2.Response
 
@@ -52,7 +54,7 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
                 }
 
                 override fun onFailure(call: Call<ResponseListUserDto>, t: Throwable) {
-
+                    activity?.let { makeToast(it.baseContext, getString(R.string.SERVER_ERROR)) }
                 }
             }
         )
