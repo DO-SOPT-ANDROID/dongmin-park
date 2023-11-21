@@ -42,7 +42,6 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun getUserList() {
-
         userService.getUserList(2).enqueue(
             object : retrofit2.Callback<ResponseListUserDto> {
                 override fun onResponse(
@@ -51,6 +50,7 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
                 ) {
                     val userList = response.body()?.data ?: return
                     viewModel.setUserList(userList)
+                    activity?.let { makeToast(it.baseContext, getString(R.string.SERVER_ERROR)) }
                 }
 
                 override fun onFailure(call: Call<ResponseListUserDto>, t: Throwable) {
