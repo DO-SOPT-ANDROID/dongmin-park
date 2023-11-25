@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import org.sopt.dosopttemplate.R
 
 abstract class BaseFragment<T : ViewBinding> : Fragment() {
     private var _binding: T? = null
     val binding: T
-        get() = requireNotNull(_binding) { "바인딩 객체가 생성되지 않았습니다." }
+        get() = requireNotNull(_binding) { getString(R.string.BINDING_ERROR) }
 
     override fun onCreateView(
         inflater: LayoutInflater,

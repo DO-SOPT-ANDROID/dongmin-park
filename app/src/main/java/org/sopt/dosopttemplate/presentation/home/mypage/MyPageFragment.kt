@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosopttemplate.presentation.home.mypage
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.base.BaseFragment
 import org.sopt.dosopttemplate.databinding.FragmentMyPageBinding
 import org.sopt.dosopttemplate.utilprivate.makeToast
@@ -33,9 +34,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
     private fun setUserInfo() =
         with(binding) {
             tvMainId.text = arguments?.getString(ARGS_ID)
-            tvMainMbti.text = arguments?.getString(ARGS_MBTI)
+            tvMainUserName.text = arguments?.getString(ARGS_USERNAME)
             tvMainNickname.text = arguments?.getString(ARGS_NICKNAME)
-            tvMainAboutMe.text = arguments?.getString(ARGS_ABOUTME)
         }
 
     private fun logoutBtn() {
@@ -59,18 +59,16 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
 
     companion object {
         private const val ARGS_ID = "ID"
-        private const val ARGS_MBTI = "MBTI"
+        private const val ARGS_USERNAME = "USERNAME"
         private const val ARGS_NICKNAME = "NICKNAME"
-        private const val ARGS_ABOUTME = "ABOUTME"
 
         @JvmStatic
-        fun newInstance(id: String, aboutMe: String, nickname: String, mbti: String) =
+        fun newInstance(id: Int, username: String, nickname: String) =
             MyPageFragment().apply {
                 val args = bundleOf(
-                    ARGS_ID to id,
-                    ARGS_ABOUTME to aboutMe,
+                    ARGS_ID to id.toString(),
+                    ARGS_USERNAME to username,
                     ARGS_NICKNAME to nickname,
-                    ARGS_MBTI to mbti,
                 )
                 arguments = args
             }
