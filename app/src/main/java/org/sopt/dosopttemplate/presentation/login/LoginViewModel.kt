@@ -1,0 +1,53 @@
+package org.sopt.dosopttemplate.presentation.login
+
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import org.sopt.dosopttemplate.model.requestModel.RequestLoginDto
+import org.sopt.dosopttemplate.model.responseModel.ResponseLoginDto
+import org.sopt.dosopttemplate.server.ServicePool.authService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class LoginViewModel : ViewModel() {
+    val isLoginButtonClicked: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    val id = MutableLiveData<String>()
+    val pw = MutableLiveData<String>()
+
+    private val _loginResult = MutableLiveData<ResponseLoginDto>()
+    val loginResult: LiveData<ResponseLoginDto>
+        get() = _loginResult
+
+    private val _loginSuccess = MutableLiveData<Boolean>()
+    val loginSuccess: LiveData<Boolean>
+        get() = _loginSuccess
+
+    fun login() {
+        authService.login(RequestLoginDto(id.value.toString(), pw.value.toString()))
+            .enqueue(object : Callback<ResponseLoginDto> {
+                override fun onResponse(
+                    call: Call<ResponseLoginDto>,
+                    response: Response<ResponseLoginDto>,
+                ) {
+                    if (response.isSuccessful) {
+                        _loginResult.value = response.body()
+                        _loginSuccess.value = true
+                    } else {
+                        _loginSuccess.value = false
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
+                    _loginSuccess.value = false
+                }
+            })
+    }
+
+    fun moveSignupActivity() {
+        isMoveSignupActivity.value = true
+    }
+}
