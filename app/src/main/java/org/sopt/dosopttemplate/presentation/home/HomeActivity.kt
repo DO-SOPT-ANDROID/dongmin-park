@@ -23,12 +23,12 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        connectFragemnt()
+        connectFragment()
         clickBottomNavigation()
         setUser()
     }
 
-    private fun connectFragemnt() {
+    private fun connectFragment() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_home)
         if (currentFragment == null) {
             binding.bnvHome.selectedItemId = R.id.menu_home

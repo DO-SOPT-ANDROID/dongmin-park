@@ -18,7 +18,7 @@ import org.sopt.dosopttemplate.utilprivate.makeToast
 class UserFragment : BaseFragment<FragmentHomeBinding>() {
     private val viewModel: UserViewModel by viewModels { UserViewModelFactory() }
 
-    lateinit var userAdapter: UserAdapter
+    private lateinit var userAdapter: UserAdapter
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -34,20 +34,16 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
         userAdapter = UserAdapter(requireContext())
         binding.rvHumans.adapter = userAdapter
 
+        lifecycleScope.launch {
+            viewModel.loadUserList()
+        }
+
         observeList()
     }
 
     private fun observeList() {
         viewModel.roadListResult.observe(viewLifecycleOwner) {
             userAdapter.submitList(it)
-        }
-
-        viewModel.roadListSuccess.observe(viewLifecycleOwner) { success ->
-            if (success) {
-                activity?.let { makeToast(it.baseContext, getString(R.string.LOGIN_SUCCESS)) }
-            } else {
-                activity?.let { makeToast(it.baseContext, getString(R.string.SERVER_ERROR)) }
-            }
         }
     }
 
