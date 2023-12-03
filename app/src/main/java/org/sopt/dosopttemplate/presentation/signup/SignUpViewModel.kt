@@ -41,9 +41,9 @@ class SignUpViewModel : ViewModel() {
             })
     }
 
-    fun isValidateId() = id.value.isNullOrEmpty() || ID_REGEX.matcher(id.value).matches()
+    fun isValidateId() = ID_REGEX.matcher(id.value).matches()
 
-    fun isValidatePw() = pw.value.isNullOrEmpty() || PW_REGEX.matcher(pw.value).matches()
+    fun isValidatePw() = PW_REGEX.matcher(pw.value).matches()
 
     fun isValidateNickname() = !nickname.value.isNullOrBlank()
 

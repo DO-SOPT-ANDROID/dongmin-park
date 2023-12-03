@@ -52,7 +52,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:maxLines="1"
                 android:text="@={loginViewModel.id}" />
         </com.google.android.material.textfield.TextInputLayout>

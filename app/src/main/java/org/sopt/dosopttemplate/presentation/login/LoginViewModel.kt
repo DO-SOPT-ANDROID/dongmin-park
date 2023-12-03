@@ -60,11 +60,9 @@ class LoginViewModel : ViewModel() {
         isMoveSignupActivity.value = true
     }
 
-    fun isValidateId() =
-        id.value.isNullOrEmpty() || SignUpViewModel.ID_REGEX.matcher(id.value).matches()
+    fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value).matches()
 
-    fun isValidatePw() =
-        pw.value.isNullOrEmpty() || SignUpViewModel.PW_REGEX.matcher(pw.value).matches()
+    fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value).matches()
 
     private fun checkValidation() = isValidateId() && isValidatePw()
 }

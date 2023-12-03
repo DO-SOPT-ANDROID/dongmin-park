@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
     private fun observeIdCorrect() {
         authViewModel.id.observe(this) {
             binding.etvLoginId.error =
-                if (authViewModel.isValidateId()) null
+                if (authViewModel.isValidateId() || authViewModel.id.value.isNullOrBlank()) null
                 else getString(R.string.ID_ERROR)
         }
     }
@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
     private fun observePwCorrect() {
         authViewModel.pw.observe(this) {
             binding.etvLoginPw.error =
-                if (authViewModel.isValidatePw()) null
+                if (authViewModel.isValidatePw() || authViewModel.pw.value.isNullOrBlank()) null
                 else getString(R.string.PW_ERROR)
 
         }
