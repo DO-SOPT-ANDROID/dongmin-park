@@ -38,18 +38,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_login_title" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etv_login_id"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_marginBottom="8dp"
             android:hint="@string/etv_login_id"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:text="@={loginViewModel.id}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_id_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_login_id_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:text="@={loginViewModel.id}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_login_pw_title"
@@ -60,37 +66,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etv_login_id" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etv_login_pw"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/etv_login_pw"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:text="@={loginViewModel.pw}"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/etv_signup_pw"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_pw_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_login_pw_title">
 
-        <TextView
-            android:id="@+id/tv_databinding"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@{loginViewModel.isLoginButtonClicked ? `로그인 버튼이 클릭되었습니다.` : `로그인 버튼을 클릭해주세요.`}"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etv_login_pw" />
-
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:text="@={loginViewModel.pw}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_login_navi_log_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> loginViewModel.login()}"
+            android:onClick="@{() -> loginViewModel.clickLoginBtn()}"
             android:text="@string/btn_login_navi_log_in"
+            android:enabled="false"
             app:layout_constraintBottom_toTopOf="@id/btn_login_navi_sign_up"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
