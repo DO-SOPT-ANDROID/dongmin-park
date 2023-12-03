@@ -27,16 +27,18 @@ class LoginViewModel : ViewModel() {
         get() = _loginSuccess
 
     fun login() {
-        authService.login(RequestLoginDto(id.value.toString(), pw.value.toString()))
+        authService.login(RequestLoginDto(id.value ?: "", pw.value ?: ""))
             .enqueue(object : Callback<ResponseLoginDto> {
                 override fun onResponse(
                     call: Call<ResponseLoginDto>,
                     response: Response<ResponseLoginDto>,
                 ) {
                     if (response.isSuccessful) {
+                        Log.e("TAG", "onResponse: 맞았다")
                         _loginResult.value = response.body()
                         _loginSuccess.value = true
                     } else {
+                        Log.e("TAG", "onResponse: ㅡㅌㄹ렸다")
                         _loginSuccess.value = false
                     }
                 }

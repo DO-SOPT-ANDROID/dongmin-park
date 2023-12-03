@@ -6,14 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import org.sopt.dosopttemplate.R
-import org.sopt.dosopttemplate.base.BaseActivity
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
-import org.sopt.dosopttemplate.model.requestModel.RequestSignupDto
-import org.sopt.dosopttemplate.presentation.login.LoginViewModel
-import org.sopt.dosopttemplate.server.ServicePool.authService
 import org.sopt.dosopttemplate.utilprivate.makeToast
-import retrofit2.Call
-import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -21,11 +15,15 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setBinding()
+        observeSignupSuccess()
+        observeInformation()
+    }
+
+    private fun setBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
         binding.lifecycleOwner = this
         binding.signUpViewModel = signUpViewModel
-
-        observeSignupSuccess()
     }
 
     private fun observeSignupSuccess() {
@@ -46,5 +44,43 @@ class SignUpActivity : AppCompatActivity() {
         }
         setResult(RESULT_OK, intent)
         finish()
+    }
+
+    private fun observeInformation() {
+        observeIdCorrect()
+        observePwCorrect()
+        observeNicknameCorrect()
+        observeIsSignUpValid()
+    }
+
+    private fun observeIdCorrect() {
+        signUpViewModel.id.observe(this) {
+            binding.etvSignupId.error =
+                if (signUpViewModel.isValidateId()) null
+                else getString(R.string.ID_ERROR)
+        }
+    }
+
+    private fun observePwCorrect() {
+        signUpViewModel.pw.observe(this) {
+            binding.etvSignupPw.error =
+                if (signUpViewModel.isValidatePw()) null
+                else getString(R.string.PW_ERROR)
+
+        }
+    }
+
+    private fun observeNicknameCorrect() {
+        signUpViewModel.nickname.observe(this) {
+            binding.etvSignupNickname.error =
+                if (signUpViewModel.isValidateNickname()) null
+                else getString(R.string.NICKNAME_ERROR)
+        }
+    }
+
+    private fun observeIsSignUpValid() {
+        signUpViewModel.buttonEnabled.observe(this) {
+            binding.btnSignupNaviLogin.isEnabled = it
+        }
     }
 }
