@@ -8,11 +8,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
-import org.sopt.dosopttemplate.data.repository.AuthRepository
+import org.sopt.dosopttemplate.data.repository.LoginRepository
 import org.sopt.dosopttemplate.presentation.signup.SignUpViewModel
 
 class LoginViewModel(
-    private val authRepository: AuthRepository,
+    private val authRepository: LoginRepository,
 ) : ViewModel() {
     val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
 

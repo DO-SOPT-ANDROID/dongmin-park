@@ -20,7 +20,7 @@ import org.sopt.dosopttemplate.utilprivate.makeToast
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    private val authViewModel: LoginViewModel by viewModels { LoginViewModelFactory() }
+    private val loginViewModel: LoginViewModel by viewModels { LoginViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
     private fun setBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.lifecycleOwner = this
-        binding.loginViewModel = authViewModel
+        binding.loginViewModel = loginViewModel
     }
 
     private fun getIntentInfo() {
@@ -53,14 +53,14 @@ class LoginActivity : AppCompatActivity() {
         val id = result.data?.getStringExtra("ID") ?: return
         val pw = result.data?.getStringExtra("PW") ?: return
 
-        authViewModel.id.value = id
-        authViewModel.pw.value = pw
+        loginViewModel.id.value = id
+        loginViewModel.pw.value = pw
     }
 
     private fun observeIdCorrect() {
-        authViewModel.id.observe(this) {
+        loginViewModel.id.observe(this) {
             binding.etvLoginId.error =
-                if (authViewModel.isValidateId() || authViewModel.id.value.isNullOrBlank()) {
+                if (loginViewModel.isValidateId() || loginViewModel.id.value.isNullOrBlank()) {
                     null
                 } else {
                     getString(R.string.ID_ERROR)
@@ -69,9 +69,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observePwCorrect() {
-        authViewModel.pw.observe(this) {
+        loginViewModel.pw.observe(this) {
             binding.etvLoginPw.error =
-                if (authViewModel.isValidatePw() || authViewModel.pw.value.isNullOrBlank()) {
+                if (loginViewModel.isValidatePw() || loginViewModel.pw.value.isNullOrBlank()) {
                     null
                 } else {
                     getString(R.string.PW_ERROR)
@@ -80,15 +80,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeIsSignUpValid() {
-        authViewModel.buttonEnabled.observe(this) {
+        loginViewModel.buttonEnabled.observe(this) {
             binding.btnLoginNaviLogIn.isEnabled = it
         }
     }
 
     private fun observeLoginResult() {
-        authViewModel.loginSuccess.observe(this) { isSuccess ->
+        loginViewModel.loginSuccess.observe(this) { isSuccess ->
             if (isSuccess) {
-                val data: ResponseLoginDto = authViewModel.loginResult.value ?: return@observe
+                val data: ResponseLoginDto = loginViewModel.loginResult.value ?: return@observe
                 val userId = data.id
                 val username = data.username
                 val nickname = data.nickname
@@ -109,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
     private fun observeMoveSignupActivity() {
-        authViewModel.isMoveSignupActivity.observe(this) {
+        loginViewModel.isMoveSignupActivity.observe(this) {
             if (it) {
                 resultLauncher.launch(
                     Intent(this, SignUpActivity::class.java).apply {
