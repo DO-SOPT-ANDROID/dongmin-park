@@ -20,7 +20,7 @@ import org.sopt.dosopttemplate.utilprivate.makeToast
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    private val authViewModel by viewModels<LoginViewModel>()
+    private val authViewModel: LoginViewModel by viewModels { LoginViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

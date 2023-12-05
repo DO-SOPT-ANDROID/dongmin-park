@@ -1,19 +1,19 @@
 package org.sopt.dosopttemplate.presentation.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.data.ServicePool.authService
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
+import org.sopt.dosopttemplate.data.repository.AuthRepository
 import org.sopt.dosopttemplate.presentation.signup.SignUpViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+    private val authRepository: AuthRepository,
+) : ViewModel() {
     val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val id = MutableLiveData<String>()
@@ -33,26 +33,14 @@ class LoginViewModel : ViewModel() {
         get() = _loginSuccess
 
     fun clickLoginBtn() {
-        authService.login(RequestLoginDto(id.value ?: "", pw.value ?: ""))
-            .enqueue(object : Callback<ResponseLoginDto> {
-                override fun onResponse(
-                    call: Call<ResponseLoginDto>,
-                    response: Response<ResponseLoginDto>,
-                ) {
-                    if (response.isSuccessful) {
-                        Log.e("TAG", "onResponse: 맞았다")
-                        _loginResult.value = response.body()
-                        _loginSuccess.value = true
-                    } else {
-                        Log.e("TAG", "onResponse: ㅡㅌㄹ렸다")
-                        _loginSuccess.value = false
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
-                    _loginSuccess.value = false
-                }
-            })
+        viewModelScope.launch {
+            authRepository.login(RequestLoginDto(id.value ?: "", pw.value ?: "")).onSuccess {
+                _loginResult.value = it
+                _loginSuccess.value = true
+            }.onFailure {
+                _loginSuccess.value = false
+            }
+        }
     }
 
     fun moveSignupActivity() {
