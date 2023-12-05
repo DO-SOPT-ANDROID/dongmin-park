@@ -1,6 +1,6 @@
-package org.sopt.dosopttemplate.server
+package org.sopt.dosopttemplate.data
 
-import  android.util.Log
+import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -8,10 +8,10 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.dosopttemplate.BuildConfig
-import org.sopt.dosopttemplate.server.ApiFactory.BASE_URL
-import org.sopt.dosopttemplate.server.ApiFactory.USER_BASE_URL
-import org.sopt.dosopttemplate.server.service.AuthService
-import org.sopt.dosopttemplate.server.service.UserService
+import org.sopt.dosopttemplate.data.ApiFactory.BASE_URL
+import org.sopt.dosopttemplate.data.ApiFactory.USER_BASE_URL
+import org.sopt.dosopttemplate.data.service.AuthService
+import org.sopt.dosopttemplate.data.service.UserService
 import retrofit2.Retrofit
 
 object ApiFactory {

@@ -2,8 +2,8 @@ package org.sopt.dosopttemplate.presentation.home.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import org.sopt.dosopttemplate.repository.UserRepository
-import org.sopt.dosopttemplate.server.ServicePool.userService
+import org.sopt.dosopttemplate.data.ServicePool.userService
+import org.sopt.dosopttemplate.data.repository.UserRepository
 
 class UserViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseListUserUserDto
 import org.sopt.dosopttemplate.databinding.ItemUsersBinding
-import org.sopt.dosopttemplate.model.responseModel.ResponseListUserUserDto
 import org.sopt.dosopttemplate.util.ItemDiffCallback
 
 class UserAdapter(context: Context) : ListAdapter<ResponseListUserUserDto, UserViewHolder>(

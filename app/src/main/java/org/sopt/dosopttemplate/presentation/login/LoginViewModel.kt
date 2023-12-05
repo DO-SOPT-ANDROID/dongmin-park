@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.model.requestModel.RequestLoginDto
-import org.sopt.dosopttemplate.model.responseModel.ResponseLoginDto
+import org.sopt.dosopttemplate.data.ServicePool.authService
+import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.presentation.signup.SignUpViewModel
-import org.sopt.dosopttemplate.server.ServicePool.authService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

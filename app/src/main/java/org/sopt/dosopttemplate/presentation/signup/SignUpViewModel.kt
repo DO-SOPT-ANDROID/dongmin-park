@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.model.requestModel.RequestSignupDto
-import org.sopt.dosopttemplate.server.ServicePool.authService
+import org.sopt.dosopttemplate.data.ServicePool.authService
+import org.sopt.dosopttemplate.data.model.requestModel.RequestSignupDto
 import retrofit2.Call
 import retrofit2.Response
 import java.util.regex.Pattern

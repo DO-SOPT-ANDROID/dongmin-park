@@ -1,6 +1,6 @@
-package org.sopt.dosopttemplate.server.service
+package org.sopt.dosopttemplate.data.service
 
-import org.sopt.dosopttemplate.model.responseModel.ResponseListUserDto
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseListUserDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -3,8 +3,8 @@ package org.sopt.dosopttemplate.presentation.home.user
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.model.responseModel.ResponseListUserUserDto
-import org.sopt.dosopttemplate.repository.UserRepository
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseListUserUserDto
+import org.sopt.dosopttemplate.data.repository.UserRepository
 
 class UserViewModel(
     private val userRepository: UserRepository,
