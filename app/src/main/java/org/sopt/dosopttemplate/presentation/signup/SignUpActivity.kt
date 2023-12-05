@@ -10,7 +10,8 @@ import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-    private val signUpViewModel by viewModels<SignUpViewModel>()
+    private val signUpViewModel: SignUpViewModel by viewModels { SignUpViewModelFactory() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

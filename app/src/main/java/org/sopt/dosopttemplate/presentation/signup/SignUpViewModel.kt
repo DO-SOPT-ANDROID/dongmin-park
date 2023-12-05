@@ -4,13 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.data.ServicePool.authService
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestSignupDto
-import retrofit2.Call
-import retrofit2.Response
+import org.sopt.dosopttemplate.data.repository.SignUpRepository
 import java.util.regex.Pattern
 
-class SignUpViewModel : ViewModel() {
+class SignUpViewModel(
+    private val signUpRepository: SignUpRepository,
+) : ViewModel() {
     val id = MutableLiveData<String>()
     val pw = MutableLiveData<String>()
     val nickname = MutableLiveData<String>()
@@ -26,19 +28,21 @@ class SignUpViewModel : ViewModel() {
         get() = _signUpSuccess
 
     fun clickSignupBtn() {
-        authService.signup(RequestSignupDto(id.value ?: "", pw.value ?: "", nickname.value ?: ""))
-            .enqueue(object : retrofit2.Callback<Unit> {
-                override fun onResponse(
-                    call: Call<Unit>,
-                    response: Response<Unit>,
-                ) {
-                    _signUpSuccess.value = response.isSuccessful
+        viewModelScope.launch {
+            signUpRepository.signup(
+                RequestSignupDto(
+                    id.value ?: "",
+                    pw.value ?: "",
+                    nickname.value ?: "",
+                ),
+            )
+                .onSuccess {
+                    _signUpSuccess.value = true
                 }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                .onFailure {
                     _signUpSuccess.value = false
                 }
-            })
+        }
     }
 
     fun isValidateId() = ID_REGEX.matcher(id.value.toString()).matches()

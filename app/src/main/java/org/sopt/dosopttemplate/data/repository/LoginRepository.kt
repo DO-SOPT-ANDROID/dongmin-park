@@ -7,7 +7,7 @@ class LoginRepository(
     private val authService: AuthService,
 ) {
     suspend fun login(request: RequestLoginDto) =
-        kotlin.runCatching {
+        runCatching {
             authService.login(request)
         }
 }

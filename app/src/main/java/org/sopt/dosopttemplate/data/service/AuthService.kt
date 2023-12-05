@@ -3,7 +3,6 @@ package org.sopt.dosopttemplate.data.service
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
 import org.sopt.dosopttemplate.data.model.requestModel.RequestSignupDto
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
-import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -14,7 +13,7 @@ interface AuthService {
     ): ResponseLoginDto
 
     @POST("api/v1/members")
-    fun signup(
+    suspend fun signup(
         @Body request: RequestSignupDto,
-    ): Call<Unit>
+    ): Unit
 }
