@@ -50,7 +50,6 @@ class SignUpActivity : AppCompatActivity() {
         observeIdCorrect()
         observePwCorrect()
         observeNicknameCorrect()
-        observeIsSignUpValid()
     }
 
     private fun observeIdCorrect() {
@@ -83,12 +82,6 @@ class SignUpActivity : AppCompatActivity() {
                 } else {
                     getString(R.string.NICKNAME_ERROR)
                 }
-        }
-    }
-
-    private fun observeIsSignUpValid() {
-        signUpViewModel.buttonEnabled.observe(this) {
-            binding.btnSignupNaviLogin.isEnabled = it
         }
     }
 }

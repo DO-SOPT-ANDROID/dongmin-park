@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> signUpViewModel.clickSignupBtn()}"
             android:text="@string/btn_signup_navi_login"
-            android:enabled="false"
+            android:enabled="@{signUpViewModel.buttonEnabled}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

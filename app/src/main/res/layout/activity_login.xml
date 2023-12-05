@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> loginViewModel.clickLoginBtn()}"
             android:text="@string/btn_login_navi_log_in"
-            android:enabled="false"
+            android:enabled="@{loginViewModel.buttonEnabled}"
             app:layout_constraintBottom_toTopOf="@id/btn_login_navi_sign_up"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

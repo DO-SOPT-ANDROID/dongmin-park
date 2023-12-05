@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
         observeIdCorrect()
         observePwCorrect()
         observeLoginResult()
-        observeIsSignUpValid()
         observeMoveSignupActivity()
     }
 
@@ -76,12 +75,6 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     getString(R.string.PW_ERROR)
                 }
-        }
-    }
-
-    private fun observeIsSignUpValid() {
-        loginViewModel.buttonEnabled.observe(this) {
-            binding.btnLoginNaviLogIn.isEnabled = it
         }
     }
 
