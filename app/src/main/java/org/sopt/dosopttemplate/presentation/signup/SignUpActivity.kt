@@ -55,25 +55,33 @@ class SignUpActivity : AppCompatActivity() {
     private fun observeIdCorrect() {
         signUpViewModel.id.observe(this) {
             binding.etvSignupId.error =
-                if (signUpViewModel.isValidateId() || signUpViewModel.id.value.isNullOrBlank()) null
-                else getString(R.string.ID_ERROR)
+                if (signUpViewModel.isValidateId() || signUpViewModel.id.value.isNullOrBlank()) {
+                    null
+                } else {
+                    getString(R.string.ID_ERROR)
+                }
         }
     }
 
     private fun observePwCorrect() {
         signUpViewModel.pw.observe(this) {
             binding.etvSignupPw.error =
-                if (signUpViewModel.isValidatePw() || signUpViewModel.pw.value.isNullOrBlank()) null
-                else getString(R.string.PW_ERROR)
-
+                if (signUpViewModel.isValidatePw() || signUpViewModel.pw.value.isNullOrBlank()) {
+                    null
+                } else {
+                    getString(R.string.PW_ERROR)
+                }
         }
     }
 
     private fun observeNicknameCorrect() {
         signUpViewModel.nickname.observe(this) {
             binding.etvSignupNickname.error =
-                if (signUpViewModel.isValidateNickname() || signUpViewModel.nickname.value.isNullOrBlank()) null
-                else getString(R.string.NICKNAME_ERROR)
+                if (signUpViewModel.isValidateNickname() || signUpViewModel.nickname.value.isNullOrBlank()) {
+                    null
+                } else {
+                    getString(R.string.NICKNAME_ERROR)
+                }
         }
     }
 

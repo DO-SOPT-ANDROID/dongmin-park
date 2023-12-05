@@ -16,7 +16,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
     private lateinit var moveLoginListener: OnFragmentListener
     override fun getFragmentBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): FragmentMyPageBinding = FragmentMyPageBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

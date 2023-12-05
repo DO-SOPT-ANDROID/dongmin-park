@@ -19,12 +19,12 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(
         view: View,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
 

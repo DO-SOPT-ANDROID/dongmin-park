@@ -7,7 +7,7 @@ import org.sopt.dosopttemplate.model.responseModel.ResponseListUserUserDto
 import org.sopt.dosopttemplate.repository.UserRepository
 
 class UserViewModel(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
 ) : ViewModel() {
     private val _loadListResult = MutableLiveData<List<ResponseListUserUserDto>>()
     val loadListResult: LiveData<List<ResponseListUserUserDto>>

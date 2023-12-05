@@ -9,7 +9,7 @@ import org.sopt.dosopttemplate.model.responseModel.ResponseListUserUserDto
 import org.sopt.dosopttemplate.util.ItemDiffCallback
 
 class UserAdapter(context: Context) : ListAdapter<ResponseListUserUserDto, UserViewHolder>(
-    UserDiffCallback
+    UserDiffCallback,
 ) {
     private val inflater by lazy { LayoutInflater.from(context) }
 
@@ -28,7 +28,7 @@ class UserAdapter(context: Context) : ListAdapter<ResponseListUserUserDto, UserV
         private val UserDiffCallback =
             ItemDiffCallback<ResponseListUserUserDto>(
                 onItemsTheSame = { old, new -> old.id == new.id },
-                onContentsTheSame = { old, new -> old == new }
+                onContentsTheSame = { old, new -> old == new },
             )
     }
 }

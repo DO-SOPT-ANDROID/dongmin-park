@@ -14,7 +14,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
-    val isLoginButtonClicked: MutableLiveData<Boolean> = MutableLiveData(false)
     val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val id = MutableLiveData<String>()
@@ -60,9 +59,9 @@ class LoginViewModel : ViewModel() {
         isMoveSignupActivity.value = true
     }
 
-    fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value).matches()
+    fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value.toString()).matches()
 
-    fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value).matches()
+    fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value.toString()).matches()
 
     private fun checkValidation() = isValidateId() && isValidatePw()
 }

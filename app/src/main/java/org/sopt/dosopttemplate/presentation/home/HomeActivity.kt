@@ -83,7 +83,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
                             id = userInfo.id,
                             username = userInfo.username,
                             nickname = userInfo.nickname,
-                        )
+                        ),
                     )
                     true
                 }
@@ -109,7 +109,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
                 moveLoginActivity()
 
                 text = e.message.toString()
-            }
+            },
         ).also {
             makeToast(this, text)
         }
@@ -118,7 +118,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private fun getUserInfo() {
         userInfo =
             intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException(
-                getString(R.string.USER_INFO_ERROR)
+                getString(R.string.USER_INFO_ERROR),
             )
     }
 

@@ -10,7 +10,7 @@ import org.sopt.dosopttemplate.databinding.FragmentDoAndroidBinding
 class DoAndroidFragment : BaseFragment<FragmentDoAndroidBinding>() {
     override fun getFragmentBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): FragmentDoAndroidBinding = FragmentDoAndroidBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -60,17 +60,22 @@ class LoginActivity : AppCompatActivity() {
     private fun observeIdCorrect() {
         authViewModel.id.observe(this) {
             binding.etvLoginId.error =
-                if (authViewModel.isValidateId() || authViewModel.id.value.isNullOrBlank()) null
-                else getString(R.string.ID_ERROR)
+                if (authViewModel.isValidateId() || authViewModel.id.value.isNullOrBlank()) {
+                    null
+                } else {
+                    getString(R.string.ID_ERROR)
+                }
         }
     }
 
     private fun observePwCorrect() {
         authViewModel.pw.observe(this) {
             binding.etvLoginPw.error =
-                if (authViewModel.isValidatePw() || authViewModel.pw.value.isNullOrBlank()) null
-                else getString(R.string.PW_ERROR)
-
+                if (authViewModel.isValidatePw() || authViewModel.pw.value.isNullOrBlank()) {
+                    null
+                } else {
+                    getString(R.string.PW_ERROR)
+                }
         }
     }
 
@@ -79,7 +84,6 @@ class LoginActivity : AppCompatActivity() {
             binding.btnLoginNaviLogIn.isEnabled = it
         }
     }
-
 
     private fun observeLoginResult() {
         authViewModel.loginSuccess.observe(this) { isSuccess ->
@@ -110,7 +114,7 @@ class LoginActivity : AppCompatActivity() {
                 resultLauncher.launch(
                     Intent(this, SignUpActivity::class.java).apply {
                         this
-                    }
+                    },
                 )
             }
         }
