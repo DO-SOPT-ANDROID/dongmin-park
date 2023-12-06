@@ -1,7 +1,6 @@
 package org.sopt.dosopttemplate.presentation.signup
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
@@ -21,11 +20,7 @@ class SignUpViewModel(
     val nickname = MutableLiveData<String>()
     val isNicknameValid: LiveData<Boolean> = nickname.map { isValidatePw() }
 
-    val buttonEnabled = MediatorLiveData<Boolean>().apply {
-        addSource(id) { value = checkValidation() }
-        addSource(pw) { value = checkValidation() }
-        addSource(nickname) { value = checkValidation() }
-    }
+    val buttonEnabled = MutableLiveData(false)
 
     private val _signUpSuccess = MutableLiveData<Boolean>()
     val signUpSuccess: LiveData<Boolean>
@@ -49,13 +44,15 @@ class SignUpViewModel(
         }
     }
 
-    fun isValidateId() = ID_REGEX.matcher(id.value.toString()).matches()
+    private fun isValidateId() = ID_REGEX.matcher(id.value.toString()).matches()
 
-    fun isValidatePw() = PW_REGEX.matcher(pw.value.toString()).matches()
+    private fun isValidatePw() = PW_REGEX.matcher(pw.value.toString()).matches()
 
-    fun isValidateNickname() = !nickname.value.isNullOrBlank()
+    private fun isValidateNickname() = !nickname.value.isNullOrBlank()
 
-    private fun checkValidation() = isValidateId() && isValidatePw() && isValidateNickname()
+    fun checkValidation() {
+        buttonEnabled.value = isValidateId() && isValidatePw() && isValidateNickname()
+    }
 
     companion object {
         private const val idRegex = "(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,10}"

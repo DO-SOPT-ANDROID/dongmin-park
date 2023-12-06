@@ -65,6 +65,8 @@ class LoginActivity : AppCompatActivity() {
                 binding.etvLoginId.isErrorEnabled = true
                 binding.etvLoginId.error = getString(R.string.ID_ERROR)
             }
+
+            loginViewModel.checkValidation()
         }
     }
 
@@ -76,6 +78,8 @@ class LoginActivity : AppCompatActivity() {
                 binding.etvLoginPw.isErrorEnabled = true
                 binding.etvLoginPw.error = getString(R.string.PW_ERROR)
             }
+
+            loginViewModel.checkValidation()
         }
     }
 

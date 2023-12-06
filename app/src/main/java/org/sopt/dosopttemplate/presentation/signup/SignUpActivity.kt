@@ -61,6 +61,8 @@ class SignUpActivity : AppCompatActivity() {
                 binding.etvSignupId.isErrorEnabled = true
                 binding.etvSignupId.error = getString(R.string.ID_ERROR)
             }
+
+            signUpViewModel.checkValidation()
         }
     }
 
@@ -72,6 +74,8 @@ class SignUpActivity : AppCompatActivity() {
                 binding.etvSignupPw.isErrorEnabled = true
                 binding.etvSignupPw.error = getString(R.string.PW_ERROR)
             }
+
+            signUpViewModel.checkValidation()
         }
     }
 
@@ -83,6 +87,8 @@ class SignUpActivity : AppCompatActivity() {
                 binding.etvSignupNickname.isErrorEnabled = true
                 binding.etvSignupNickname.error = getString(R.string.NICKNAME_ERROR)
             }
+
+            signUpViewModel.checkValidation()
         }
     }
 }
