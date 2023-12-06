@@ -13,6 +13,7 @@ import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
+import org.sopt.dosopttemplate.presentation.ViewModelFactory
 import org.sopt.dosopttemplate.presentation.home.HomeActivity
 import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
 import org.sopt.dosopttemplate.utilprivate.makeToast
@@ -20,7 +21,7 @@ import org.sopt.dosopttemplate.utilprivate.makeToast
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    private val loginViewModel: LoginViewModel by viewModels { LoginViewModelFactory() }
+    private val loginViewModel: LoginViewModel by viewModels { ViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

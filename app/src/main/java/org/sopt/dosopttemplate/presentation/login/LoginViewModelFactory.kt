@@ -15,3 +15,5 @@ class LoginViewModelFactory : ViewModelProvider.Factory {
         }
     }
 }
+
+// 아래 ViewModelFactory가 맞다면 삭제하도록 하겠습니다. 임시...저장용...
