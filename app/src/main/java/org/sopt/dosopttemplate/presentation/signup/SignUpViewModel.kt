@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestSignupDto
@@ -14,8 +15,11 @@ class SignUpViewModel(
     private val signUpRepository: SignUpRepository,
 ) : ViewModel() {
     val id = MutableLiveData<String>()
+    val isIdValid: LiveData<Boolean> = id.map { isValidateId() }
     val pw = MutableLiveData<String>()
+    val isPwValid: LiveData<Boolean> = pw.map { isValidatePw() }
     val nickname = MutableLiveData<String>()
+    val isNicknameValid: LiveData<Boolean> = nickname.map { isValidatePw() }
 
     val buttonEnabled = MediatorLiveData<Boolean>().apply {
         addSource(id) { value = checkValidation() }

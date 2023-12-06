@@ -58,24 +58,24 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeIdCorrect() {
-        loginViewModel.id.observe(this) {
-            binding.etvLoginId.error =
-                if (loginViewModel.isValidateId() || loginViewModel.id.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.ID_ERROR)
-                }
+        loginViewModel.isIdValid.observe(this) {
+            if (it || loginViewModel.id.value.isNullOrBlank()) {
+                binding.etvLoginId.isErrorEnabled = false
+            } else {
+                binding.etvLoginId.isErrorEnabled = true
+                binding.etvLoginId.error = getString(R.string.ID_ERROR)
+            }
         }
     }
 
     private fun observePwCorrect() {
-        loginViewModel.pw.observe(this) {
-            binding.etvLoginPw.error =
-                if (loginViewModel.isValidatePw() || loginViewModel.pw.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.PW_ERROR)
-                }
+        loginViewModel.isPwValid.observe(this) {
+            if (it || loginViewModel.pw.value.isNullOrBlank()) {
+                binding.etvLoginPw.isErrorEnabled = false
+            } else {
+                binding.etvLoginPw.isErrorEnabled = true
+                binding.etvLoginPw.error = getString(R.string.PW_ERROR)
+            }
         }
     }
 

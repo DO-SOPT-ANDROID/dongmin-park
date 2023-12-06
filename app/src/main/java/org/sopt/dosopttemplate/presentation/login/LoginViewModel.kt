@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
@@ -17,7 +18,9 @@ class LoginViewModel(
     val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val id = MutableLiveData<String>()
+    val isIdValid: LiveData<Boolean> = id.map { isValidateId() }
     val pw = MutableLiveData<String>()
+    val isPwValid: LiveData<Boolean> = pw.map { isValidatePw() }
 
     val buttonEnabled = MediatorLiveData<Boolean>().apply {
         addSource(id) { value = checkValidation() }
@@ -47,9 +50,9 @@ class LoginViewModel(
         isMoveSignupActivity.value = true
     }
 
-    fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value.toString()).matches()
+    private fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value.toString()).matches()
 
-    fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value.toString()).matches()
+    private fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value.toString()).matches()
 
     private fun checkValidation() = isValidateId() && isValidatePw()
 }

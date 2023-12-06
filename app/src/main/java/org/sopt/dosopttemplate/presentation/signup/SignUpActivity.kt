@@ -54,35 +54,35 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun observeIdCorrect() {
-        signUpViewModel.id.observe(this) {
-            binding.etvSignupId.error =
-                if (signUpViewModel.isValidateId() || signUpViewModel.id.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.ID_ERROR)
-                }
+        signUpViewModel.isIdValid.observe(this) {
+            if (it || signUpViewModel.id.value.isNullOrBlank()) {
+                binding.etvSignupId.isErrorEnabled = false
+            } else {
+                binding.etvSignupId.isErrorEnabled = true
+                binding.etvSignupId.error = getString(R.string.ID_ERROR)
+            }
         }
     }
 
     private fun observePwCorrect() {
-        signUpViewModel.pw.observe(this) {
-            binding.etvSignupPw.error =
-                if (signUpViewModel.isValidatePw() || signUpViewModel.pw.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.PW_ERROR)
-                }
+        signUpViewModel.isPwValid.observe(this) {
+            if (it || signUpViewModel.pw.value.isNullOrBlank()) {
+                binding.etvSignupPw.isErrorEnabled = false
+            } else {
+                binding.etvSignupPw.isErrorEnabled = true
+                binding.etvSignupPw.error = getString(R.string.PW_ERROR)
+            }
         }
     }
 
     private fun observeNicknameCorrect() {
-        signUpViewModel.nickname.observe(this) {
-            binding.etvSignupNickname.error =
-                if (signUpViewModel.isValidateNickname() || signUpViewModel.nickname.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.NICKNAME_ERROR)
-                }
+        signUpViewModel.isNicknameValid.observe(this) {
+            if (it || signUpViewModel.nickname.value.isNullOrBlank()) {
+                binding.etvSignupNickname.isErrorEnabled = false
+            } else {
+                binding.etvSignupNickname.isErrorEnabled = true
+                binding.etvSignupNickname.error = getString(R.string.NICKNAME_ERROR)
+            }
         }
     }
 }
