@@ -9,9 +9,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.model.User
-import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.presentation.ViewModelFactory
 import org.sopt.dosopttemplate.presentation.home.HomeActivity
@@ -84,19 +87,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeLoginResult() {
-        loginViewModel.loginSuccess.observe(this) { isSuccess ->
-            if (isSuccess) {
-                val data: ResponseLoginDto = loginViewModel.loginResult.value ?: return@observe
-                val userId = data.id
-                val username = data.username
-                val nickname = data.nickname
-                val user = User(id = userId, username = username, nickname = nickname)
+        loginViewModel.checkLoginUserState.flowWithLifecycle(lifecycle).onEach { state ->
+            when (state) {
+                is LoginState.Success -> {
+                    moveHomeActivity(state.data)
+                }
 
-                moveHomeActivity(user)
-            } else {
-                makeToast(this@LoginActivity, getString(R.string.SERVER_ERROR))
+                is LoginState.Error -> makeToast(this, "Fail")
+                is LoginState.Empty -> {
+                }
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun moveHomeActivity(user: User) =

@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
-import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.data.repository.LoginRepository
 import org.sopt.dosopttemplate.presentation.signup.SignUpViewModel
 
@@ -23,21 +25,21 @@ class LoginViewModel(
 
     val buttonEnabled = MutableLiveData(false)
 
-    private val _loginResult = MutableLiveData<ResponseLoginDto>()
-    val loginResult: LiveData<ResponseLoginDto>
-        get() = _loginResult
-
-    private val _loginSuccess = MutableLiveData<Boolean>()
-    val loginSuccess: LiveData<Boolean>
-        get() = _loginSuccess
+    private val _checkLoginUserState = MutableStateFlow<LoginState<User>>(LoginState.Empty)
+    val checkLoginUserState: StateFlow<LoginState<User>> = _checkLoginUserState
 
     fun clickLoginBtn() {
         viewModelScope.launch {
-            authRepository.login(RequestLoginDto(id.value ?: "", pw.value ?: "")).onSuccess {
-                _loginResult.value = it
-                _loginSuccess.value = true
+            authRepository.login(
+                RequestLoginDto(id.value ?: "", pw.value ?: ""),
+            ).onSuccess {
+                _checkLoginUserState.emit(
+                    LoginState.Success(
+                        User(id = it.id, username = it.username, nickname = it.nickname),
+                    ),
+                )
             }.onFailure {
-                _loginSuccess.value = false
+                _checkLoginUserState.emit(LoginState.Error)
             }
         }
     }
