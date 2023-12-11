@@ -6,11 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
+import org.sopt.dosopttemplate.presentation.ViewModelFactory
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-    private val signUpViewModel: SignUpViewModel by viewModels { SignUpViewModelFactory() }
+    private val signUpViewModel: SignUpViewModel by viewModels { ViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

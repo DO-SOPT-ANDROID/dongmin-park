@@ -9,11 +9,12 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
+import org.sopt.dosopttemplate.presentation.ViewModelFactory
 import org.sopt.dosopttemplate.util.binding.BaseFragment
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class UserFragment : BaseFragment<FragmentHomeBinding>() {
-    private val viewModel: UserViewModel by viewModels { UserViewModelFactory() }
+    private val viewModel: UserViewModel by viewModels { ViewModelFactory() }
 
     private lateinit var userAdapter: UserAdapter
 
