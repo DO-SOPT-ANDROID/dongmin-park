@@ -16,7 +16,9 @@ import org.sopt.dosopttemplate.utilprivate.makeToast
 class UserFragment : BaseFragment<FragmentHomeBinding>() {
     private val viewModel: UserViewModel by viewModels { ViewModelFactory() }
 
-    private lateinit var userAdapter: UserAdapter
+    private var _userAdapter: UserAdapter? = null
+    private val userAdapter
+        get() = requireNotNull(_userAdapter) { getString(R.string.ADAPTER_ERROR) }
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -35,7 +37,7 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun setAdapter() {
-        userAdapter = UserAdapter(requireContext())
+        _userAdapter = UserAdapter(requireContext())
         binding.rvHumans.adapter = userAdapter
     }
 
@@ -53,6 +55,11 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
         lifecycleScope.launch {
             viewModel.loadUserList()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _userAdapter = null
     }
 
     fun scrollToTop() {
