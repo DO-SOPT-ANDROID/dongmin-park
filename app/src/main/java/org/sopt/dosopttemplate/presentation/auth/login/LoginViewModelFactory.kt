@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.presentation.login
+package org.sopt.dosopttemplate.presentation.auth.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

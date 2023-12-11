@@ -7,10 +7,10 @@ import androidx.fragment.app.Fragment
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
+import org.sopt.dosopttemplate.presentation.auth.login.LoginActivity
 import org.sopt.dosopttemplate.presentation.home.doandroid.DoAndroidFragment
 import org.sopt.dosopttemplate.presentation.home.mypage.MyPageFragment
 import org.sopt.dosopttemplate.presentation.home.user.UserFragment
-import org.sopt.dosopttemplate.presentation.login.LoginActivity
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
 

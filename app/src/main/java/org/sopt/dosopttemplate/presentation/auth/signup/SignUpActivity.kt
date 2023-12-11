@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.presentation.signup
+package org.sopt.dosopttemplate.presentation.auth.signup
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -17,7 +17,6 @@ class SignUpActivity : AppCompatActivity() {
 
         setBinding()
         observeSignupSuccess()
-        observeInformation()
     }
 
     private fun setBinding() {
@@ -44,44 +43,5 @@ class SignUpActivity : AppCompatActivity() {
         }
         setResult(RESULT_OK, intent)
         finish()
-    }
-
-    private fun observeInformation() {
-        observeIdCorrect()
-        observePwCorrect()
-        observeNicknameCorrect()
-    }
-
-    private fun observeIdCorrect() {
-        signUpViewModel.id.observe(this) {
-            binding.etvSignupId.error =
-                if (signUpViewModel.isValidateId() || signUpViewModel.id.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.ID_ERROR)
-                }
-        }
-    }
-
-    private fun observePwCorrect() {
-        signUpViewModel.pw.observe(this) {
-            binding.etvSignupPw.error =
-                if (signUpViewModel.isValidatePw() || signUpViewModel.pw.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.PW_ERROR)
-                }
-        }
-    }
-
-    private fun observeNicknameCorrect() {
-        signUpViewModel.nickname.observe(this) {
-            binding.etvSignupNickname.error =
-                if (signUpViewModel.isValidateNickname() || signUpViewModel.nickname.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.NICKNAME_ERROR)
-                }
-        }
     }
 }

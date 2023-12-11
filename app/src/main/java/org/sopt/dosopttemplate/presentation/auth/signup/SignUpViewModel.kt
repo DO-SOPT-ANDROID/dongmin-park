@@ -1,13 +1,13 @@
-package org.sopt.dosopttemplate.presentation.signup
+package org.sopt.dosopttemplate.presentation.auth.signup
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestSignupDto
 import org.sopt.dosopttemplate.data.repository.SignUpRepository
+import org.sopt.dosopttemplate.presentation.auth.AuthState
 import java.util.regex.Pattern
 
 class SignUpViewModel(
@@ -17,15 +17,21 @@ class SignUpViewModel(
     val pw = MutableLiveData<String>()
     val nickname = MutableLiveData<String>()
 
-    val buttonEnabled = MediatorLiveData<Boolean>().apply {
-        addSource(id) { value = checkValidation() }
-        addSource(pw) { value = checkValidation() }
-        addSource(nickname) { value = checkValidation() }
-    }
-
     private val _signUpSuccess = MutableLiveData<Boolean>()
     val signUpSuccess: LiveData<Boolean>
         get() = _signUpSuccess
+
+    private val _signUpState = MutableLiveData<AuthState>()
+    val signUpState: LiveData<AuthState>
+        get() = _signUpState
+
+    fun checkValid() {
+        val isIdError = !isValidateId() && !id.value.isNullOrBlank()
+        val isPwError = !isValidatePw() && !pw.value.isNullOrBlank()
+        val isDataValid = isValidateId() && isValidatePw() && isValidateNickname()
+
+        _signUpState.value = AuthState(isIdError, isPwError, isDataValid)
+    }
 
     fun clickSignupBtn() {
         viewModelScope.launch {
@@ -35,23 +41,19 @@ class SignUpViewModel(
                     pw.value ?: "",
                     nickname.value ?: "",
                 ),
-            )
-                .onSuccess {
-                    _signUpSuccess.value = true
-                }
-                .onFailure {
-                    _signUpSuccess.value = false
-                }
+            ).onSuccess {
+                _signUpSuccess.value = true
+            }.onFailure {
+                _signUpSuccess.value = false
+            }
         }
     }
 
-    fun isValidateId() = ID_REGEX.matcher(id.value.toString()).matches()
+    private fun isValidateId() = ID_REGEX.matcher(id.value.toString()).matches()
 
-    fun isValidatePw() = PW_REGEX.matcher(pw.value.toString()).matches()
+    private fun isValidatePw() = PW_REGEX.matcher(pw.value.toString()).matches()
 
-    fun isValidateNickname() = !nickname.value.isNullOrBlank()
-
-    private fun checkValidation() = isValidateId() && isValidatePw() && isValidateNickname()
+    private fun isValidateNickname() = !nickname.value.isNullOrBlank()
 
     companion object {
         private const val idRegex = "(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,10}"

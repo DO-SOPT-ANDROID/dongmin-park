@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.presentation.login
+package org.sopt.dosopttemplate.presentation.auth.login
 
 import android.app.Activity
 import android.content.Intent
@@ -13,8 +13,8 @@ import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
+import org.sopt.dosopttemplate.presentation.auth.signup.SignUpActivity
 import org.sopt.dosopttemplate.presentation.home.HomeActivity
-import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class LoginActivity : AppCompatActivity() {
@@ -27,8 +27,6 @@ class LoginActivity : AppCompatActivity() {
 
         setBinding()
         getIntentInfo()
-        observeIdCorrect()
-        observePwCorrect()
         observeLoginResult()
         observeMoveSignupActivity()
     }
@@ -54,28 +52,6 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.setId(id)
         loginViewModel.setPw(pw)
-    }
-
-    private fun observeIdCorrect() {
-        loginViewModel.id.observe(this) {
-            binding.etvLoginId.error =
-                if (loginViewModel.isValidateId() || loginViewModel.id.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.ID_ERROR)
-                }
-        }
-    }
-
-    private fun observePwCorrect() {
-        loginViewModel.pw.observe(this) {
-            binding.etvLoginPw.error =
-                if (loginViewModel.isValidatePw() || loginViewModel.pw.value.isNullOrBlank()) {
-                    null
-                } else {
-                    getString(R.string.PW_ERROR)
-                }
-        }
     }
 
     private fun observeLoginResult() {

@@ -1,7 +1,6 @@
-package org.sopt.dosopttemplate.presentation.login
+package org.sopt.dosopttemplate.presentation.auth.login
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,8 @@ import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.data.repository.LoginRepository
-import org.sopt.dosopttemplate.presentation.signup.SignUpViewModel
+import org.sopt.dosopttemplate.presentation.auth.AuthState
+import org.sopt.dosopttemplate.presentation.auth.signup.SignUpViewModel
 
 class LoginViewModel(
     private val authRepository: LoginRepository,
@@ -19,18 +19,9 @@ class LoginViewModel(
     val id = MutableLiveData<String>()
     val pw = MutableLiveData<String>()
 
-    fun setId(inputId: String) {
-        id.value = inputId
-    }
-
-    fun setPw(inputPw: String) {
-        pw.value = inputPw
-    }
-
-    val buttonEnabled = MediatorLiveData<Boolean>().apply {
-        addSource(id) { value = checkValidation() }
-        addSource(pw) { value = checkValidation() }
-    }
+    private val _loginState = MutableLiveData<AuthState>()
+    val loginState: LiveData<AuthState>
+        get() = _loginState
 
     private val _loginResult = MutableLiveData<ResponseLoginDto>()
     val loginResult: LiveData<ResponseLoginDto>
@@ -39,6 +30,22 @@ class LoginViewModel(
     private val _loginSuccess = MutableLiveData<Boolean>()
     val loginSuccess: LiveData<Boolean>
         get() = _loginSuccess
+
+    fun checkValid() {
+        val isIdError = !isValidateId() && !id.value.isNullOrBlank()
+        val isPwError = !isValidatePw() && !pw.value.isNullOrBlank()
+        val isDataValid = isValidateId() && isValidatePw()
+
+        _loginState.value = AuthState(isIdError, isPwError, isDataValid)
+    }
+
+    fun setId(inputId: String) {
+        id.value = inputId
+    }
+
+    fun setPw(inputPw: String) {
+        pw.value = inputPw
+    }
 
     fun clickLoginBtn() {
         viewModelScope.launch {
