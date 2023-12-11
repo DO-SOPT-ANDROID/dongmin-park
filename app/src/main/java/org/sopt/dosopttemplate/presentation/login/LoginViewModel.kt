@@ -19,6 +19,14 @@ class LoginViewModel(
     val id = MutableLiveData<String>()
     val pw = MutableLiveData<String>()
 
+    fun setId(inputId: String) {
+        id.value = inputId
+    }
+
+    fun setPw(inputPw: String) {
+        pw.value = inputPw
+    }
+
     val buttonEnabled = MediatorLiveData<Boolean>().apply {
         addSource(id) { value = checkValidation() }
         addSource(pw) { value = checkValidation() }

@@ -52,8 +52,8 @@ class LoginActivity : AppCompatActivity() {
         val id = result.data?.getStringExtra("ID") ?: return
         val pw = result.data?.getStringExtra("PW") ?: return
 
-        loginViewModel.id.value = id
-        loginViewModel.pw.value = pw
+        loginViewModel.setId(id)
+        loginViewModel.setPw(pw)
     }
 
     private fun observeIdCorrect() {
@@ -94,12 +94,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun moveHomeActivity(user: User) =
-        Intent(this, HomeActivity::class.java).apply {
-            putExtra("USER", user)
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(this)
-        }
+    private fun moveHomeActivity(user: User) = Intent(this, HomeActivity::class.java).apply {
+        putExtra("USER", user)
+        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(this)
+    }
 
     private fun observeMoveSignupActivity() {
         loginViewModel.isMoveSignupActivity.observe(this) {
