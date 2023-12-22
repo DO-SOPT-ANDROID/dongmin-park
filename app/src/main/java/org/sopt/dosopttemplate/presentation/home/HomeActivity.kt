@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.sopt.dosopttemplate.R
-import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
+import org.sopt.dosopttemplate.domain.entity.User
 import org.sopt.dosopttemplate.presentation.auth.login.LoginActivity
 import org.sopt.dosopttemplate.presentation.home.doandroid.DoAndroidFragment
 import org.sopt.dosopttemplate.presentation.home.mypage.MyPageFragment

@@ -10,9 +10,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import org.sopt.dosopttemplate.R
-import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
+import org.sopt.dosopttemplate.domain.entity.User
 import org.sopt.dosopttemplate.presentation.ViewModelFactory
 import org.sopt.dosopttemplate.presentation.auth.signup.SignUpActivity
 import org.sopt.dosopttemplate.presentation.home.HomeActivity
