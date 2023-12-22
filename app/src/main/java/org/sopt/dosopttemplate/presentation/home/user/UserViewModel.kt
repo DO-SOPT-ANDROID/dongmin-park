@@ -3,13 +3,26 @@ package org.sopt.dosopttemplate.presentation.home.user
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.model.responseModel.ResponseListUserUserDto
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseListUserUserDto
+import org.sopt.dosopttemplate.data.repository.UserRepository
 
-class UserViewModel : ViewModel() {
-    private val _userList = MutableLiveData<List<ResponseListUserUserDto>>()
-    val userList: LiveData<List<ResponseListUserUserDto>> = _userList
+class UserViewModel(
+    private val userRepository: UserRepository,
+) : ViewModel() {
+    private val _loadListResult = MutableLiveData<List<ResponseListUserUserDto>>()
+    val loadListResult: LiveData<List<ResponseListUserUserDto>>
+        get() = _loadListResult
 
-    fun setUserList(test: List<ResponseListUserUserDto>) {
-        _userList.value = test.toList()
+    private val _loadListSuccess = MutableLiveData<Boolean>()
+    val loadListSuccess: LiveData<Boolean>
+        get() = _loadListSuccess
+
+    suspend fun loadUserList() {
+        userRepository.loadUser(2).onSuccess {
+            _loadListResult.value = it
+            _loadListSuccess.value = true
+        }.onFailure {
+            _loadListSuccess.value = false
+        }
     }
 }

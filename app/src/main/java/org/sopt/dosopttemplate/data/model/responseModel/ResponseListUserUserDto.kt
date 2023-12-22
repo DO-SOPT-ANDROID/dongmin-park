@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.model.responseModel
+package org.sopt.dosopttemplate.data.model.responseModel
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,5 +14,5 @@ data class ResponseListUserUserDto(
     @SerialName("last_name")
     val last_name: String,
     @SerialName("avatar")
-    val avatar: String
+    val avatar: String,
 )

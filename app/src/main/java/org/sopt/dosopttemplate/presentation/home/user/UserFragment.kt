@@ -4,60 +4,62 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.R
-import org.sopt.dosopttemplate.server.ServicePool.userService
-import org.sopt.dosopttemplate.presentation.home.user.UserAdapter
-import org.sopt.dosopttemplate.presentation.home.user.UserViewModel
-import org.sopt.dosopttemplate.base.BaseFragment
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
-import org.sopt.dosopttemplate.model.responseModel.ResponseListUserDto
+import org.sopt.dosopttemplate.presentation.ViewModelFactory
+import org.sopt.dosopttemplate.util.binding.BaseFragment
 import org.sopt.dosopttemplate.utilprivate.makeToast
-import retrofit2.Call
-import retrofit2.Response
 
 class UserFragment : BaseFragment<FragmentHomeBinding>() {
-    private val viewModel by activityViewModels<UserViewModel>()
-    lateinit var userAdapter: UserAdapter
+    private val viewModel: UserViewModel by viewModels { ViewModelFactory() }
+
+    private var _userAdapter: UserAdapter? = null
+    private val userAdapter
+        get() = requireNotNull(_userAdapter) { getString(R.string.ADAPTER_ERROR) }
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(
         view: View,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        userAdapter = UserAdapter(requireContext())
+        setAdapter()
+        observeList()
+        loadList()
+    }
+
+    private fun setAdapter() {
+        _userAdapter = UserAdapter(requireContext())
         binding.rvHumans.adapter = userAdapter
+    }
 
-        getUserList()
+    private fun observeList() {
+        viewModel.loadListSuccess.observe(viewLifecycleOwner) {
+            if (!it) makeToast(requireContext(), getString(R.string.SERVER_ERROR))
+        }
 
-        viewModel.userList.observe(viewLifecycleOwner) {
+        viewModel.loadListResult.observe(viewLifecycleOwner) {
             userAdapter.submitList(it)
         }
     }
 
-    private fun getUserList() {
-        userService.getUserList(2).enqueue(
-            object : retrofit2.Callback<ResponseListUserDto> {
-                override fun onResponse(
-                    call: Call<ResponseListUserDto>,
-                    response: Response<ResponseListUserDto>
-                ) {
-                    val userList = response.body()?.data ?: return
-                    viewModel.setUserList(userList)
-                    activity?.let { makeToast(it.baseContext, getString(R.string.SERVER_ERROR)) }
-                }
+    private fun loadList() {
+        lifecycleScope.launch {
+            viewModel.loadUserList()
+        }
+    }
 
-                override fun onFailure(call: Call<ResponseListUserDto>, t: Throwable) {
-                    activity?.let { makeToast(it.baseContext, getString(R.string.SERVER_ERROR)) }
-                }
-            }
-        )
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _userAdapter = null
     }
 
     fun scrollToTop() {

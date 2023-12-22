@@ -3,8 +3,8 @@ package org.sopt.dosopttemplate.presentation.home.user
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import org.sopt.dosopttemplate.R
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseListUserUserDto
 import org.sopt.dosopttemplate.databinding.ItemUsersBinding
-import org.sopt.dosopttemplate.model.responseModel.ResponseListUserUserDto
 
 class UserViewHolder(private val binding: ItemUsersBinding) :
     RecyclerView.ViewHolder(binding.root) {

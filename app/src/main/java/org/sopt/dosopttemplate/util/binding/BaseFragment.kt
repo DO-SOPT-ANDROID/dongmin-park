@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.base
+package org.sopt.dosopttemplate.util.binding
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = getFragmentBinding(inflater, container)
         return binding.root

@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.model.responseModel
+package org.sopt.dosopttemplate.data.model.responseModel
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -8,5 +8,5 @@ data class ResponseListUserSupportDto(
     @SerialName("url")
     val url: String,
     @SerialName("text")
-    val text: String
+    val text: String,
 )
