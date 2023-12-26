@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.presentation.signup
+package org.sopt.dosopttemplate.presentation.auth.signup
 
 import android.os.Bundle
 import androidx.activity.viewModels

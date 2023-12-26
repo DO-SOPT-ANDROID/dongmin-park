@@ -7,7 +7,7 @@
 
         <variable
             name="loginViewModel"
-            type="org.sopt.dosopttemplate.presentation.login.LoginViewModel" />
+            type="org.sopt.dosopttemplate.presentation.auth.login.LoginViewModel" />
 
     </data>
 
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="30dp"
         android:paddingVertical="60dp"
-        tools:context=".presentation.login.LoginActivity">
+        tools:context=".presentation.auth.login.LoginActivity">
 
         <TextView
             android:id="@+id/tv_login_title"
@@ -45,13 +45,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:hint="@string/etv_login_id"
+            app:errorEnabled="@{!loginViewModel.loginState.idError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_id_title">
+            app:layout_constraintTop_toBottomOf="@id/tv_login_id_title"
+            tools:error="@{loginViewModel.loginState.idError == true ? @string/ID_ERROR : null }">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:afterTextChanged="@{(text) -> loginViewModel.checkValid()}"
                 android:inputType="text"
                 android:maxLines="1"
                 android:text="@={loginViewModel.id}" />
@@ -73,13 +76,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:hint="@string/etv_signup_pw"
+            app:errorEnabled="@{!loginViewModel.loginState.pwError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_pw_title">
+            app:layout_constraintTop_toBottomOf="@id/tv_login_pw_title"
+            tools:error="@{loginViewModel.loginState.pwError == true ? @string/PW_ERROR : null }">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:afterTextChanged="@{(text) -> loginViewModel.checkValid()}"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:text="@={loginViewModel.pw}" />
@@ -89,7 +95,7 @@
             android:id="@+id/btn_login_navi_log_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="@{loginViewModel.buttonEnabled}"
+            android:enabled="@{loginViewModel.loginState.dataValid}"
             android:onClick="@{() -> loginViewModel.clickLoginBtn()}"
             android:text="@string/btn_login_navi_log_in"
             app:layout_constraintBottom_toTopOf="@id/btn_login_navi_sign_up"

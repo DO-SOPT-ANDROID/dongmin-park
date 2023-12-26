@@ -6,7 +6,7 @@
 
         <variable
             name="signUpViewModel"
-            type="org.sopt.dosopttemplate.presentation.signup.SignUpViewModel" />
+            type="org.sopt.dosopttemplate.presentation.auth.signup.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

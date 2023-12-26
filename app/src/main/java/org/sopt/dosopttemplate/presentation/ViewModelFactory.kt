@@ -6,9 +6,9 @@ import org.sopt.dosopttemplate.data.ServicePool
 import org.sopt.dosopttemplate.data.repository.LoginRepository
 import org.sopt.dosopttemplate.data.repository.SignUpRepository
 import org.sopt.dosopttemplate.data.repository.UserRepository
+import org.sopt.dosopttemplate.presentation.auth.login.LoginViewModel
+import org.sopt.dosopttemplate.presentation.auth.signup.SignUpViewModel
 import org.sopt.dosopttemplate.presentation.home.user.UserViewModel
-import org.sopt.dosopttemplate.presentation.login.LoginViewModel
-import org.sopt.dosopttemplate.presentation.signup.SignUpViewModel
 
 class ViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

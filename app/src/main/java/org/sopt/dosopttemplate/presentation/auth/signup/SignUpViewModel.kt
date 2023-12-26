@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.presentation.signup
+package org.sopt.dosopttemplate.presentation.auth.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

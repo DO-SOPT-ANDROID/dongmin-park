@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.presentation.login
+package org.sopt.dosopttemplate.presentation.auth.login
 
 import android.app.Activity
 import android.content.Intent
@@ -10,15 +10,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.model.User
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
 import org.sopt.dosopttemplate.presentation.ViewModelFactory
+import org.sopt.dosopttemplate.presentation.auth.signup.SignUpActivity
 import org.sopt.dosopttemplate.presentation.home.HomeActivity
-import org.sopt.dosopttemplate.presentation.signup.SignUpActivity
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
 class LoginActivity : AppCompatActivity() {
@@ -31,8 +30,6 @@ class LoginActivity : AppCompatActivity() {
 
         setBinding()
         getIntentInfo()
-        observeIdCorrect()
-        observePwCorrect()
         observeLoginResult()
         observeMoveSignupActivity()
     }
@@ -60,44 +57,20 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.pw.value = pw
     }
 
-    private fun observeIdCorrect() {
-        loginViewModel.isIdValid.observe(this) {
-            if (it || loginViewModel.id.value.isNullOrBlank()) {
-                binding.etvLoginId.isErrorEnabled = false
-            } else {
-                binding.etvLoginId.isErrorEnabled = true
-                binding.etvLoginId.error = getString(R.string.ID_ERROR)
-            }
-
-            loginViewModel.checkValidation()
-        }
-    }
-
-    private fun observePwCorrect() {
-        loginViewModel.isPwValid.observe(this) {
-            if (it || loginViewModel.pw.value.isNullOrBlank()) {
-                binding.etvLoginPw.isErrorEnabled = false
-            } else {
-                binding.etvLoginPw.isErrorEnabled = true
-                binding.etvLoginPw.error = getString(R.string.PW_ERROR)
-            }
-
-            loginViewModel.checkValidation()
-        }
-    }
-
     private fun observeLoginResult() {
-        loginViewModel.checkLoginUserState.flowWithLifecycle(lifecycle).onEach { state ->
-            when (state) {
-                is LoginState.Success -> {
-                    moveHomeActivity(state.data)
-                }
+        loginViewModel.loginSuccess.observe(this) { isSuccess ->
+            if (isSuccess) {
+                val data: ResponseLoginDto = loginViewModel.loginResult.value ?: return@observe
+                val userId = data.id
+                val username = data.username
+                val nickname = data.nickname
+                val user = User(id = userId, username = username, nickname = nickname)
 
-                is LoginState.Error -> makeToast(this, "Fail")
-                is LoginState.Empty -> {
-                }
+                moveHomeActivity(user)
+            } else {
+                makeToast(this@LoginActivity, getString(R.string.SERVER_ERROR))
             }
-        }.launchIn(lifecycleScope)
+        }
     }
 
     private fun moveHomeActivity(user: User) =
@@ -108,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
     private fun observeMoveSignupActivity() {
-        loginViewModel.isMoveSignupActivity.observe(this) {
+        loginViewModel.isMoveSignupActivity.flowWithLifecycle(lifecycle).onEach {
             if (it) {
                 resultLauncher.launch(
                     Intent(this, SignUpActivity::class.java).apply {
