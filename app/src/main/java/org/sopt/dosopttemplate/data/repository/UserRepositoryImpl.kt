@@ -3,12 +3,12 @@ package org.sopt.dosopttemplate.data.repository
 import org.sopt.dosopttemplate.data.datasource.UserDataSource
 import org.sopt.dosopttemplate.data.model.responseModel.toOtherUserList
 import org.sopt.dosopttemplate.domain.entity.OtherUserList
-import org.sopt.dosopttemplate.domain.repository.UserRepo
+import org.sopt.dosopttemplate.domain.repository.UserRepository
 import javax.inject.Inject
 
-class UserRepository @Inject constructor(
+class UserRepositoryImpl @Inject constructor(
     private val userDataSource: UserDataSource,
-) : UserRepo {
+) : UserRepository {
     override suspend fun loadUser(page: Int): Result<OtherUserList> =
         runCatching {
             userDataSource.getUserList(page).toOtherUserList()

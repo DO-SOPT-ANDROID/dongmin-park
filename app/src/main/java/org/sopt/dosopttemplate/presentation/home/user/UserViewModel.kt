@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.dosopttemplate.domain.entity.OtherUserList
-import org.sopt.dosopttemplate.domain.repository.UserRepo
+import org.sopt.dosopttemplate.domain.repository.UserRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor(
-    private val userRepo: UserRepo,
+    private val userRepository: UserRepository,
 ) : ViewModel() {
     private val _loadListResult = MutableLiveData<List<OtherUserList.OtherUser>>()
     val loadListResult: LiveData<List<OtherUserList.OtherUser>>
@@ -21,7 +21,7 @@ class UserViewModel @Inject constructor(
         get() = _loadListSuccess
 
     suspend fun loadUserList() {
-        userRepo.loadUser(2).onSuccess {
+        userRepository.loadUser(2).onSuccess {
             _loadListResult.value = it.otherUserList
             _loadListSuccess.value = true
         }.onFailure {

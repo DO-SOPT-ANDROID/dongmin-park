@@ -8,14 +8,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
-import org.sopt.dosopttemplate.domain.repository.LoginRepo
+import org.sopt.dosopttemplate.domain.repository.LoginRepository
 import org.sopt.dosopttemplate.presentation.auth.AuthState
 import org.sopt.dosopttemplate.presentation.auth.signup.SignUpViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepo: LoginRepo,
+    private val loginRepository: LoginRepository,
 ) : ViewModel() {
     val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -52,7 +52,7 @@ class LoginViewModel @Inject constructor(
 
     fun clickLoginBtn() {
         viewModelScope.launch {
-            loginRepo.login(RequestLoginDto(id.value ?: "", pw.value ?: "")).onSuccess {
+            loginRepository.login(RequestLoginDto(id.value ?: "", pw.value ?: "")).onSuccess {
                 _loginResult.value = it
                 _loginSuccess.value = true
             }.onFailure {

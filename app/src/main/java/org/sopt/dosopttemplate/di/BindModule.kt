@@ -10,12 +10,12 @@ import org.sopt.dosopttemplate.data.datasource.SignUpDataSource
 import org.sopt.dosopttemplate.data.datasource.SignUpDataSourceImpl
 import org.sopt.dosopttemplate.data.datasource.UserDataSource
 import org.sopt.dosopttemplate.data.datasource.UserDataSourceImpl
-import org.sopt.dosopttemplate.data.repository.LoginRepository
-import org.sopt.dosopttemplate.data.repository.SignUpRepository
-import org.sopt.dosopttemplate.data.repository.UserRepository
-import org.sopt.dosopttemplate.domain.repository.LoginRepo
-import org.sopt.dosopttemplate.domain.repository.SignUpRepo
-import org.sopt.dosopttemplate.domain.repository.UserRepo
+import org.sopt.dosopttemplate.data.repository.LoginRepositoryImpl
+import org.sopt.dosopttemplate.data.repository.SignUpRepositoryImpl
+import org.sopt.dosopttemplate.data.repository.UserRepositoryImpl
+import org.sopt.dosopttemplate.domain.repository.LoginRepository
+import org.sopt.dosopttemplate.domain.repository.SignUpRepository
+import org.sopt.dosopttemplate.domain.repository.UserRepository
 import javax.inject.Singleton
 
 @Module
@@ -36,13 +36,13 @@ abstract class BindModule {
 
     @Binds
     @Singleton
-    abstract fun bindUserRepository(userRepository: UserRepository): UserRepo
+    abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 
     @Binds
     @Singleton
-    abstract fun bindLoginRepository(loginRepository: LoginRepository): LoginRepo
+    abstract fun bindLoginRepository(loginRepositoryImpl: LoginRepositoryImpl): LoginRepository
 
     @Binds
     @Singleton
-    abstract fun bindSignupRepository(signupRepository: SignUpRepository): SignUpRepo
+    abstract fun bindSignupRepository(signupRepositoryImpl: SignUpRepositoryImpl): SignUpRepository
 }
