@@ -9,10 +9,6 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(
     private val userDataSource: UserDataSource,
 ) : UserRepo {
-    //    suspend fun loadUser(page: Int) =
-//        runCatching {
-//            userService.getUserList(page).data
-//        }
     override suspend fun loadUser(page: Int): Result<OtherUserList> =
         runCatching {
             userDataSource.getUserList(page).toOtherUserList()
