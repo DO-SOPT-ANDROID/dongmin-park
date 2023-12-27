@@ -65,9 +65,7 @@ class LoginViewModel @Inject constructor(
         isMoveSignupActivity.value = true
     }
 
-    fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value.toString()).matches()
+    private fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value.toString()).matches()
 
-    fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value.toString()).matches()
-
-    private fun checkValidation() = isValidateId() && isValidatePw()
+    private fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value.toString()).matches()
 }
