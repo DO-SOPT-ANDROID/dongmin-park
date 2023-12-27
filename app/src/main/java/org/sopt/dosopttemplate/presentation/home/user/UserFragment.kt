@@ -6,15 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
-import org.sopt.dosopttemplate.presentation.ViewModelFactory
 import org.sopt.dosopttemplate.util.binding.BaseFragment
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
+@AndroidEntryPoint
 class UserFragment : BaseFragment<FragmentHomeBinding>() {
-    private val viewModel: UserViewModel by viewModels { ViewModelFactory() }
+
+    private val userViewModel: UserViewModel by viewModels()
 
     private lateinit var userAdapter: UserAdapter
 
@@ -40,18 +42,18 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun observeList() {
-        viewModel.loadListSuccess.observe(viewLifecycleOwner) {
+        userViewModel.loadListSuccess.observe(viewLifecycleOwner) {
             if (!it) makeToast(requireContext(), getString(R.string.SERVER_ERROR))
         }
 
-        viewModel.loadListResult.observe(viewLifecycleOwner) {
+        userViewModel.loadListResult.observe(viewLifecycleOwner) {
             userAdapter.submitList(it)
         }
     }
 
     private fun loadList() {
         lifecycleScope.launch {
-            viewModel.loadUserList()
+            userViewModel.loadUserList()
         }
     }
 

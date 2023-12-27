@@ -1,12 +1,19 @@
 package org.sopt.dosopttemplate.data.repository
 
-import org.sopt.dosopttemplate.data.service.UserService
+import org.sopt.dosopttemplate.data.datasource.UserDataSource
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseListUserUserDto
+import org.sopt.dosopttemplate.domain.repository.UserRepo
+import javax.inject.Inject
 
-class UserRepository(
-    private val userService: UserService,
-) {
-    suspend fun loadUser(page: Int) =
+class UserRepository @Inject constructor(
+    private val userDataSource: UserDataSource,
+) : UserRepo {
+    //    suspend fun loadUser(page: Int) =
+//        runCatching {
+//            userService.getUserList(page).data
+//        }
+    override suspend fun loadUser(page: Int): Result<List<ResponseListUserUserDto>> =
         runCatching {
-            userService.getUserList(page).data
+            userDataSource.getUserList(page).data
         }
 }

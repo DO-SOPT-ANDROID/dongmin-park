@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
@@ -14,6 +15,7 @@ import org.sopt.dosopttemplate.presentation.home.user.UserFragment
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var userInfo: User

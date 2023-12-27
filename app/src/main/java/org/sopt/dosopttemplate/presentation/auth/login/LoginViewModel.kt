@@ -4,19 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
-import org.sopt.dosopttemplate.data.repository.LoginRepository
+import org.sopt.dosopttemplate.domain.repository.LoginRepo
 import org.sopt.dosopttemplate.presentation.auth.AuthState
 import org.sopt.dosopttemplate.presentation.auth.signup.SignUpViewModel
+import javax.inject.Inject
 
-class LoginViewModel(
-    private val authRepository: LoginRepository,
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginRepo: LoginRepo,
+    // private val loginRepository: LoginRepository,
 ) : ViewModel() {
-    // val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isMoveSignupActivity: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val id = MutableLiveData<String>()
     val pw = MutableLiveData<String>()
@@ -32,8 +34,6 @@ class LoginViewModel(
     private val _loginSuccess = MutableLiveData<Boolean>()
     val loginSuccess: LiveData<Boolean>
         get() = _loginSuccess
-    val buttonEnabled = MutableStateFlow(false)
-    // val buttonEnabled = MutableLiveData(false)
 
     fun checkValid() {
         val isIdError = !isValidateId() && !id.value.isNullOrBlank()
@@ -53,7 +53,7 @@ class LoginViewModel(
 
     fun clickLoginBtn() {
         viewModelScope.launch {
-            authRepository.login(RequestLoginDto(id.value ?: "", pw.value ?: "")).onSuccess {
+            loginRepo.login(RequestLoginDto(id.value ?: "", pw.value ?: "")).onSuccess {
                 _loginResult.value = it
                 _loginSuccess.value = true
             }.onFailure {

@@ -3,11 +3,15 @@ package org.sopt.dosopttemplate.presentation.home.user
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseListUserUserDto
-import org.sopt.dosopttemplate.data.repository.UserRepository
+import org.sopt.dosopttemplate.domain.repository.UserRepo
+import javax.inject.Inject
 
-class UserViewModel(
-    private val userRepository: UserRepository,
+@HiltViewModel
+class UserViewModel @Inject constructor(
+    private val userRepo: UserRepo,
+    // private val userRepository: UserRepository,
 ) : ViewModel() {
     private val _loadListResult = MutableLiveData<List<ResponseListUserUserDto>>()
     val loadListResult: LiveData<List<ResponseListUserUserDto>>
@@ -18,7 +22,7 @@ class UserViewModel(
         get() = _loadListSuccess
 
     suspend fun loadUserList() {
-        userRepository.loadUser(2).onSuccess {
+        userRepo.loadUser(2).onSuccess {
             _loadListResult.value = it
             _loadListSuccess.value = true
         }.onFailure {

@@ -9,21 +9,21 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.flowWithLifecycle
-import kotlinx.coroutines.flow.onEach
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
 import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
-import org.sopt.dosopttemplate.presentation.ViewModelFactory
 import org.sopt.dosopttemplate.presentation.auth.signup.SignUpActivity
 import org.sopt.dosopttemplate.presentation.home.HomeActivity
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    private val loginViewModel: LoginViewModel by viewModels { ViewModelFactory() }
+
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +53,8 @@ class LoginActivity : AppCompatActivity() {
         val id = result.data?.getStringExtra("ID") ?: return
         val pw = result.data?.getStringExtra("PW") ?: return
 
-        loginViewModel.id.value = id
-        loginViewModel.pw.value = pw
+        loginViewModel.setId(id)
+        loginViewModel.setPw(pw)
     }
 
     private fun observeLoginResult() {
@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
     private fun observeMoveSignupActivity() {
-        loginViewModel.isMoveSignupActivity.flowWithLifecycle(lifecycle).onEach {
+        loginViewModel.isMoveSignupActivity.observe(this) {
             if (it) {
                 resultLauncher.launch(
                     Intent(this, SignUpActivity::class.java).apply {

@@ -1,0 +1,8 @@
+package org.sopt.dosopttemplate.data.datasource
+
+import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
+import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
+
+interface LoginDataSource {
+    suspend fun login(request: RequestLoginDto): ResponseLoginDto
+}

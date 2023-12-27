@@ -4,14 +4,16 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
-import org.sopt.dosopttemplate.presentation.ViewModelFactory
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
+@AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-    private val signUpViewModel: SignUpViewModel by viewModels { ViewModelFactory() }
+
+    private val signUpViewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
