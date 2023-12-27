@@ -16,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepo: LoginRepo,
-    // private val loginRepository: LoginRepository,
 ) : ViewModel() {
     val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
 

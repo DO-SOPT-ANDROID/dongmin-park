@@ -15,7 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val signUpRepo: SignUpRepo,
-    // private val signUpRepository: SignUpRepository,
 ) : ViewModel() {
     val id = MutableLiveData<String>()
     val isIdValid: LiveData<Boolean> = id.map { isValidateId() }
