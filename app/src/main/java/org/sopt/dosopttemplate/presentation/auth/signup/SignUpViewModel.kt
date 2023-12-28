@@ -8,13 +8,13 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestSignupDto
-import org.sopt.dosopttemplate.domain.repository.SignUpRepository
+import org.sopt.dosopttemplate.domain.repository.AuthRepository
 import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val signUpRepository: SignUpRepository,
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
     val id = MutableLiveData<String>()
     val isIdValid: LiveData<Boolean> = id.map { isValidateId() }
@@ -31,7 +31,7 @@ class SignUpViewModel @Inject constructor(
 
     fun clickSignupBtn() {
         viewModelScope.launch {
-            signUpRepository.signup(
+            authRepository.signup(
                 RequestSignupDto(
                     id.value ?: "",
                     pw.value ?: "",
