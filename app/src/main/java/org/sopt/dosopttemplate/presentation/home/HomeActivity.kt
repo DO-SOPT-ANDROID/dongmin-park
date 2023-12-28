@@ -4,16 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.dosopttemplate.R
+import org.sopt.dosopttemplate.data.model.User
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
-import org.sopt.dosopttemplate.model.User
+import org.sopt.dosopttemplate.presentation.auth.login.LoginActivity
+import org.sopt.dosopttemplate.presentation.auth.login.LoginActivity.Companion.EXTRA_USER
 import org.sopt.dosopttemplate.presentation.home.doandroid.DoAndroidFragment
 import org.sopt.dosopttemplate.presentation.home.mypage.MyPageFragment
 import org.sopt.dosopttemplate.presentation.home.user.UserFragment
-import org.sopt.dosopttemplate.presentation.login.LoginActivity
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var userInfo: User
@@ -23,12 +26,12 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        connectFragemnt()
+        connectFragment()
         clickBottomNavigation()
         setUser()
     }
 
-    private fun connectFragemnt() {
+    private fun connectFragment() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fcv_home)
         if (currentFragment == null) {
             binding.bnvHome.selectedItemId = R.id.menu_home
@@ -83,7 +86,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
                             id = userInfo.id,
                             username = userInfo.username,
                             nickname = userInfo.nickname,
-                        )
+                        ),
                     )
                     true
                 }
@@ -109,7 +112,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
                 moveLoginActivity()
 
                 text = e.message.toString()
-            }
+            },
         ).also {
             makeToast(this, text)
         }
@@ -117,8 +120,8 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
 
     private fun getUserInfo() {
         userInfo =
-            intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException(
-                getString(R.string.USER_INFO_ERROR)
+            intent.getParcelable(EXTRA_USER, User::class.java) ?: throw IllegalArgumentException(
+                getString(R.string.USER_INFO_ERROR),
             )
     }
 
