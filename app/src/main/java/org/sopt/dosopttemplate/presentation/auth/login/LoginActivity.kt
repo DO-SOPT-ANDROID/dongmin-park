@@ -50,8 +50,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setIDPW(result: ActivityResult) {
-        val id = result.data?.getStringExtra("ID") ?: return
-        val pw = result.data?.getStringExtra("PW") ?: return
+        val id = result.data?.getStringExtra(EXTRA_ID) ?: return
+        val pw = result.data?.getStringExtra(EXTRA_PW) ?: return
 
         loginViewModel.setIdPw(id, pw)
     }
@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun moveHomeActivity(user: User) =
         Intent(this, HomeActivity::class.java).apply {
-            putExtra("USER", user)
+            putExtra(EXTRA_USER, user)
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
             finish()
@@ -90,5 +90,11 @@ class LoginActivity : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    companion object {
+        const val EXTRA_ID = "ID"
+        const val EXTRA_PW = "PW"
+        const val EXTRA_USER = "USER"
     }
 }

@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
+import org.sopt.dosopttemplate.presentation.auth.login.LoginActivity.Companion.EXTRA_ID
+import org.sopt.dosopttemplate.presentation.auth.login.LoginActivity.Companion.EXTRA_PW
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
 @AndroidEntryPoint
@@ -42,8 +44,8 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signupSuccessed(id: String, pw: String) {
         with(intent) {
-            putExtra("ID", id)
-            putExtra("PW", pw)
+            putExtra(EXTRA_ID, id)
+            putExtra(EXTRA_PW, pw)
         }
         setResult(RESULT_OK, intent)
         finish()
