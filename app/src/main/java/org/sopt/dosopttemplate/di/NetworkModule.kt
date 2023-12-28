@@ -24,8 +24,9 @@ import javax.inject.Singleton
 class NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    fun provideOkHttpClient(
+        interceptor: HttpLoggingInterceptor,
+    ): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(interceptor)
             .connectTimeout(100, TimeUnit.SECONDS).readTimeout(100, TimeUnit.SECONDS)
             .writeTimeout(100, TimeUnit.SECONDS).build()
