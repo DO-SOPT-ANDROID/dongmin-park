@@ -38,13 +38,13 @@ class NetworkModule {
         val loggingInterceptor = HttpLoggingInterceptor { message ->
             when {
                 message.isJsonObject() ->
-                    Timber.d(JSONObject(message).toString(4))
+                    Timber.tag("okhttp").d(JSONObject(message).toString(4))
 
                 message.isJsonArray() ->
-                    Timber.d(JSONObject(message).toString(4))
+                    Timber.tag("okhttp").d(JSONObject(message).toString(4))
 
                 else -> {
-                    Timber.d("CONNECTION INFO -> $message")
+                    Timber.tag("okhttp").d("CONNECTION INFO -> $message")
                 }
             }
         }
