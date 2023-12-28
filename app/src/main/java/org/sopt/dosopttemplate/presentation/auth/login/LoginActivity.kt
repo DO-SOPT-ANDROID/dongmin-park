@@ -53,8 +53,7 @@ class LoginActivity : AppCompatActivity() {
         val id = result.data?.getStringExtra("ID") ?: return
         val pw = result.data?.getStringExtra("PW") ?: return
 
-        loginViewModel.setId(id)
-        loginViewModel.setPw(pw)
+        loginViewModel.setIdPw(id, pw)
     }
 
     private fun observeLoginResult() {

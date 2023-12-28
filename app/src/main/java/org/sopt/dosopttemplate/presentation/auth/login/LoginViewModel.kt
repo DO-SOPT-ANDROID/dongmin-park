@@ -42,11 +42,8 @@ class LoginViewModel @Inject constructor(
         _loginState.value = AuthState(isIdError, isPwError, isDataValid)
     }
 
-    fun setId(inputId: String) {
+    fun setIdPw(inputId: String, inputPw: String) {
         id.value = inputId
-    }
-
-    fun setPw(inputPw: String) {
         pw.value = inputPw
     }
 
