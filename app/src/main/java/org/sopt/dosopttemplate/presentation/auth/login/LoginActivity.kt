@@ -30,8 +30,8 @@ class LoginActivity : AppCompatActivity() {
 
         setBinding()
         getIntentInfo()
-        observeLoginResult()
-        observeMoveSignupActivity()
+        observeLoginSuccess()
+        observeIsMoveSignupActivity()
     }
 
     private fun setBinding() {
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.setIdPw(id, pw)
     }
 
-    private fun observeLoginResult() {
+    private fun observeLoginSuccess() {
         loginViewModel.loginSuccess.observe(this) { isSuccess ->
             if (isSuccess) {
                 val data: ResponseLoginDto = loginViewModel.loginResult.value ?: return@observe
@@ -80,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-    private fun observeMoveSignupActivity() {
+    private fun observeIsMoveSignupActivity() {
         loginViewModel.isMoveSignupActivity.observe(this) {
             if (it) {
                 resultLauncher.launch(

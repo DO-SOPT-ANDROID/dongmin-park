@@ -36,7 +36,7 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
-        observeList()
+        observeUserState()
         loadList()
     }
 
@@ -45,7 +45,7 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
         binding.rvHumans.adapter = userAdapter
     }
 
-    private fun observeList() {
+    private fun observeUserState() {
         userViewModel.userState.flowWithLifecycle(lifecycle).onEach { userState ->
             when (userState) {
                 is UiState.Success -> {

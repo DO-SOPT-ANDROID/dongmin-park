@@ -50,12 +50,12 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun observeInformation() {
-        observeIdCorrect()
-        observePwCorrect()
-        observeNicknameCorrect()
+        observeIsIdValid()
+        observeIsPwValid()
+        observeIsNicknameValid()
     }
 
-    private fun observeIdCorrect() {
+    private fun observeIsIdValid() {
         signUpViewModel.isIdValid.observe(this) {
             if (it || signUpViewModel.id.value.isNullOrBlank()) {
                 binding.etvSignupId.isErrorEnabled = false
@@ -68,7 +68,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun observePwCorrect() {
+    private fun observeIsPwValid() {
         signUpViewModel.isPwValid.observe(this) {
             if (it || signUpViewModel.pw.value.isNullOrBlank()) {
                 binding.etvSignupPw.isErrorEnabled = false
@@ -81,7 +81,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeNicknameCorrect() {
+    private fun observeIsNicknameValid() {
         signUpViewModel.isNicknameValid.observe(this) {
             if (it || signUpViewModel.nickname.value.isNullOrBlank()) {
                 binding.etvSignupNickname.isErrorEnabled = false
