@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
+import org.sopt.dosopttemplate.util.UiState
 import org.sopt.dosopttemplate.util.binding.BaseFragment
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
@@ -42,13 +46,25 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun observeList() {
-        userViewModel.loadListSuccess.observe(viewLifecycleOwner) {
-            if (!it) makeToast(requireContext(), getString(R.string.SERVER_ERROR))
-        }
+        userViewModel.userState.flowWithLifecycle(lifecycle).onEach { userState ->
+            when (userState) {
+                is UiState.Success -> {
+                    userAdapter.submitList(userState.data)
+                }
 
-        userViewModel.loadListResult.observe(viewLifecycleOwner) {
-            userAdapter.submitList(it)
-        }
+                is UiState.Failure -> {
+                    makeToast(requireContext(), getString(R.string.SERVER_ERROR))
+                }
+
+                is UiState.Loading -> {
+                    makeToast(requireContext(), getString(R.string.LOADING))
+                }
+
+                is UiState.Empty -> {
+                    // 어... 친구가 없으시군요 풉
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun loadList() {

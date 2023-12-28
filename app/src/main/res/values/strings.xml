@@ -35,6 +35,7 @@
     <string name="ID_ERROR">영문, 숫자 포함 6~10글자 이내로 작성해주세요</string>
     <string name="PW_ERROR">영문, 숫자, 특수문자 포함 6~12글자 이내로 작성해주세요</string>
     <string name="NICKNAME_ERROR">공백 제외 1글자 이상 작성해주세요</string>
+    <string name="LOADING">로딩중중중</string>
 
     <!-- success_message -->
     <string name="LOGIN_SUCCESS">로그인 성공</string>
