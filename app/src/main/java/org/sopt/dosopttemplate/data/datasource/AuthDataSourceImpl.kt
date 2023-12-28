@@ -10,7 +10,7 @@ class AuthDataSourceImpl @Inject constructor(
     private val authService: AuthService,
 ) : AuthDataSource {
     override suspend fun login(request: RequestLoginDto): ResponseLoginDto =
-        authService.login(request)
+        authService.postLogin(request)
 
-    override suspend fun signup(request: RequestSignupDto): Unit = authService.signup(request)
+    override suspend fun signup(request: RequestSignupDto): Unit = authService.postSignup(request)
 }
