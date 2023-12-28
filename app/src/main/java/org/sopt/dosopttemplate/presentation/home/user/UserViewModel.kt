@@ -1,9 +1,11 @@
 package org.sopt.dosopttemplate.presentation.home.user
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.domain.entity.OtherUserList
 import org.sopt.dosopttemplate.domain.repository.UserRepository
 import org.sopt.dosopttemplate.util.UiState
@@ -19,10 +21,12 @@ class UserViewModel @Inject constructor(
     val userState: StateFlow<UiState<List<OtherUserList.OtherUser>>> get() = _userState
 
     suspend fun loadUserList() {
-        userRepository.loadUser(2).onSuccess {
-            _userState.value = UiState.Success(it.otherUserList)
-        }.onFailure {
-            _userState.value = UiState.Failure(it.message.toString())
+        viewModelScope.launch {
+            userRepository.loadUser(2).onSuccess {
+                _userState.value = UiState.Success(it.otherUserList)
+            }.onFailure {
+                _userState.value = UiState.Failure(it.message.toString())
+            }
         }
     }
 }
