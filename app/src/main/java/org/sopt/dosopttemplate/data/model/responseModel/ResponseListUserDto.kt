@@ -2,7 +2,7 @@ package org.sopt.dosopttemplate.data.model.responseModel
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.sopt.dosopttemplate.domain.entity.OtherUserList
+import org.sopt.dosopttemplate.domain.entity.OtherUser
 
 @Serializable
 data class ResponseListUserDto(
@@ -42,13 +42,11 @@ data class ResponseListUserDto(
     )
 }
 
-fun ResponseListUserDto.UserDto.toOtherUser() = OtherUserList.OtherUser(
-    email = email,
-    first_name = first_name,
-    last_name = last_name,
-    avatar = avatar,
-)
-
-fun ResponseListUserDto.toOtherUserList() = OtherUserList(
-    otherUserList = data.map { it.toOtherUser() },
-)
+fun ResponseListUserDto.toOtherUser(): List<OtherUser> = data.map {
+    OtherUser(
+        email = it.email,
+        first_name = it.first_name,
+        last_name = it.last_name,
+        avatar = it.avatar,
+    )
+}

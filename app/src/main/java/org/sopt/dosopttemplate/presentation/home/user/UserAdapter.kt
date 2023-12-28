@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import org.sopt.dosopttemplate.databinding.ItemUsersBinding
-import org.sopt.dosopttemplate.domain.entity.OtherUserList
+import org.sopt.dosopttemplate.domain.entity.OtherUser
 import org.sopt.dosopttemplate.util.ItemDiffCallback
 
-class UserAdapter(context: Context) : ListAdapter<OtherUserList.OtherUser, UserViewHolder>(
+class UserAdapter(context: Context) : ListAdapter<OtherUser, UserViewHolder>(
     UserDiffCallback,
 ) {
     private val inflater by lazy { LayoutInflater.from(context) }
@@ -26,7 +26,7 @@ class UserAdapter(context: Context) : ListAdapter<OtherUserList.OtherUser, UserV
 
     companion object {
         private val UserDiffCallback =
-            ItemDiffCallback<OtherUserList.OtherUser>(
+            ItemDiffCallback<OtherUser>(
                 onItemsTheSame = { old, new -> old.email == new.email },
                 onContentsTheSame = { old, new -> old == new },
             )
