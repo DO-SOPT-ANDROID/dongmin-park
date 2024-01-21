@@ -24,8 +24,6 @@
     <string name="etv_signup_nickname">닉네임을 입력해주세요</string>
     <string name="tv_signup_mbti_title">MBTI</string>
     <string name="etv_signup_mbti">MBTI를 입력해주세요</string>
-    <string name="tv_signup_about_me_title">About Me</string>
-    <string name="etv_signup_about_me">한줄 자기소개를 입력해주세요</string>
     <string name="btn_signup_navi_login">회원가입 하기</string>
 
 
@@ -34,6 +32,10 @@
     <string name="BINDING_ERROR">바인딩 객체가 생성되지 않았습니다</string>
     <string name="SIGNUP_ERROR">회원가입 실패</string>
     <string name="USER_INFO_ERROR">유효한 유저정보가 없습니다</string>
+    <string name="ID_ERROR">영문, 숫자 포함 6~10글자 이내로 작성해주세요</string>
+    <string name="PW_ERROR">영문, 숫자, 특수문자 포함 6~12글자 이내로 작성해주세요</string>
+    <string name="NICKNAME_ERROR">공백 제외 1글자 이상 작성해주세요</string>
+    <string name="LOADING">로딩중중중</string>
 
     <!-- success_message -->
     <string name="LOGIN_SUCCESS">로그인 성공</string>
