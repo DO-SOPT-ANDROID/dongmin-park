@@ -30,6 +30,7 @@
     <!-- error_message -->
     <string name="SERVER_ERROR">서버 에러 발생</string>
     <string name="BINDING_ERROR">바인딩 객체가 생성되지 않았습니다</string>
+    <string name="ADAPTER_ERROR">어뎁터 객체가 생성되지 않았습니다</string>
     <string name="SIGNUP_ERROR">회원가입 실패</string>
     <string name="USER_INFO_ERROR">유효한 유저정보가 없습니다</string>
     <string name="ID_ERROR">영문, 숫자 포함 6~10글자 이내로 작성해주세요</string>

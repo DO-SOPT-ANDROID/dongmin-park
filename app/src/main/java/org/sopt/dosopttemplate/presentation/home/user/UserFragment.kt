@@ -22,7 +22,9 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val userViewModel: UserViewModel by viewModels()
 
-    private lateinit var userAdapter: UserAdapter
+    private var _userAdapter: UserAdapter? = null
+    private val userAdapter
+        get() = requireNotNull(_userAdapter) { getString(R.string.ADAPTER_ERROR) }
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -41,7 +43,7 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun setAdapter() {
-        userAdapter = UserAdapter(requireContext())
+        _userAdapter = UserAdapter(requireContext())
         binding.rvHumans.adapter = userAdapter
     }
 
@@ -71,6 +73,11 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
         lifecycleScope.launch {
             userViewModel.loadUserList()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _userAdapter = null
     }
 
     fun scrollToTop() {

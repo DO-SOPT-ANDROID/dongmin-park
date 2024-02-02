@@ -97,4 +97,5 @@ class LoginActivity : AppCompatActivity() {
         const val EXTRA_PW = "PW"
         const val EXTRA_USER = "USER"
     }
+
 }
