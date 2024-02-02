@@ -5,16 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.FragmentHomeBinding
-import org.sopt.dosopttemplate.presentation.ViewModelFactory
+import org.sopt.dosopttemplate.util.UiState
 import org.sopt.dosopttemplate.util.binding.BaseFragment
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
+@AndroidEntryPoint
 class UserFragment : BaseFragment<FragmentHomeBinding>() {
-    private val viewModel: UserViewModel by viewModels { ViewModelFactory() }
+
+    private val userViewModel: UserViewModel by viewModels()
 
     private var _userAdapter: UserAdapter? = null
     private val userAdapter
@@ -32,7 +38,7 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
-        observeList()
+        observeUserState()
         loadList()
     }
 
@@ -41,19 +47,31 @@ class UserFragment : BaseFragment<FragmentHomeBinding>() {
         binding.rvHumans.adapter = userAdapter
     }
 
-    private fun observeList() {
-        viewModel.loadListSuccess.observe(viewLifecycleOwner) {
-            if (!it) makeToast(requireContext(), getString(R.string.SERVER_ERROR))
-        }
+    private fun observeUserState() {
+        userViewModel.userState.flowWithLifecycle(lifecycle).onEach { userState ->
+            when (userState) {
+                is UiState.Success -> {
+                    userAdapter.submitList(userState.data)
+                }
 
-        viewModel.loadListResult.observe(viewLifecycleOwner) {
-            userAdapter.submitList(it)
-        }
+                is UiState.Failure -> {
+                    makeToast(requireContext(), getString(R.string.SERVER_ERROR))
+                }
+
+                is UiState.Loading -> {
+                    makeToast(requireContext(), getString(R.string.LOADING))
+                }
+
+                is UiState.Empty -> {
+                    // 어... 친구가 없으시군요 풉
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun loadList() {
         lifecycleScope.launch {
-            viewModel.loadUserList()
+            userViewModel.loadUserList()
         }
     }
 

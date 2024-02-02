@@ -4,16 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.dosopttemplate.R
 import org.sopt.dosopttemplate.databinding.ActivityHomeBinding
-import org.sopt.dosopttemplate.domain.entity.User
 import org.sopt.dosopttemplate.presentation.auth.login.LoginActivity
+import org.sopt.dosopttemplate.presentation.auth.login.LoginActivity.Companion.EXTRA_USER
 import org.sopt.dosopttemplate.presentation.home.doandroid.DoAndroidFragment
 import org.sopt.dosopttemplate.presentation.home.mypage.MyPageFragment
 import org.sopt.dosopttemplate.presentation.home.user.UserFragment
 import org.sopt.dosopttemplate.util.getParcelable
 import org.sopt.dosopttemplate.utilprivate.makeToast
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var userInfo: User
@@ -117,7 +119,7 @@ class HomeActivity : AppCompatActivity(), MyPageFragment.OnFragmentListener {
 
     private fun getUserInfo() {
         userInfo =
-            intent.getParcelable("USER", User::class.java) ?: throw IllegalArgumentException(
+            intent.getParcelable(EXTRA_USER, User::class.java) ?: throw IllegalArgumentException(
                 getString(R.string.USER_INFO_ERROR),
             )
     }

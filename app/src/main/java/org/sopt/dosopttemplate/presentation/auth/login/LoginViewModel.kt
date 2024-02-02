@@ -4,15 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.dosopttemplate.data.model.requestModel.RequestLoginDto
 import org.sopt.dosopttemplate.data.model.responseModel.ResponseLoginDto
-import org.sopt.dosopttemplate.data.repository.LoginRepository
+import org.sopt.dosopttemplate.domain.repository.AuthRepository
 import org.sopt.dosopttemplate.presentation.auth.AuthState
 import org.sopt.dosopttemplate.presentation.auth.signup.SignUpViewModel
+import javax.inject.Inject
 
-class LoginViewModel(
-    private val authRepository: LoginRepository,
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
     val isMoveSignupActivity: MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -39,11 +42,8 @@ class LoginViewModel(
         _loginState.value = AuthState(isIdError, isPwError, isDataValid)
     }
 
-    fun setId(inputId: String) {
+    fun setIdPw(inputId: String, inputPw: String) {
         id.value = inputId
-    }
-
-    fun setPw(inputPw: String) {
         pw.value = inputPw
     }
 
@@ -62,9 +62,8 @@ class LoginViewModel(
         isMoveSignupActivity.value = true
     }
 
-    fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value.toString()).matches()
+    private fun isValidateId() = SignUpViewModel.ID_REGEX.matcher(id.value.toString()).matches()
 
-    fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value.toString()).matches()
+    private fun isValidatePw() = SignUpViewModel.PW_REGEX.matcher(pw.value.toString()).matches()
 
-    private fun checkValidation() = isValidateId() && isValidatePw()
 }
